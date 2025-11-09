@@ -1,130 +1,58 @@
 import { useState } from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Heart, Star, Palmtree, Truck, Shield, Award, Plus, Minus, ChevronRight, Sun, Sparkles, Leaf } from "lucide-react";
+import { Heart, Palmtree, Truck, Shield, Award, ChevronRight, Sun, Sparkles, Leaf, Phone } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import DatesImg from "../assets/dates.jpg";
 
-const datesProducts = [
-  { 
-    id: 1, 
-    name: "Medjool Dates", 
-    price: 799,  
-    rating: 4.9,
-    reviews: 245,
-    description: "Premium large dates",
-    badge: "Best Seller",
-    weight: "500g", 
-    emoji: "🌴"
-  },
-  { 
-    id: 2, 
-    name: "Ajwa Dates", 
-    price: 1299, 
-    rating: 4.8,
-    reviews: 198,
-    description: "Sacred Madinah dates",
-    weight: "500g",
-    emoji: "🌴"
-  },
-  { 
-    id: 3, 
-    name: "Safawi Dates", 
-    price: 899, 
-    rating: 4.7,
-    reviews: 156,
-    description: "Rich in antioxidants",
-    badge: "Premium",
-    weight: "500g",
-    emoji: "🌴"
-  },
-  { 
-    id: 4, 
-    name: "Khudri Dates", 
-    price: 699, 
-    rating: 4.9,
-    reviews: 203,
-    description: "Sweet caramel flavor",
-    weight: "500g",
-    emoji: "🌴"
-  },
-  { 
-    id: 5, 
-    name: "Mixed Dates", 
-    price: 999, 
-    rating: 4.8,
-    reviews: 287,
-    description: "Assortment of 4 varieties",
-    badge: "Popular",
-    weight: "750g",
-    emoji: "🌴"
-  },
-  { 
-    id: 6, 
-    name: "Sukkari Dates", 
-    price: 849, 
-    rating: 4.6,
-    reviews: 134,
-    description: "Sweet golden dates",
-    weight: "500g",
-    emoji: "🌴"
-  },
-  { 
-    id: 7, 
-    name: "Deglet Noor", 
-    price: 749, 
-    rating: 4.7,
-    reviews: 98,
-    description: "Semi-dry variety",
-    badge: "New",
-    weight: "500g",
-    emoji: "🌴"
-  },
-  { 
-    id: 8, 
-    name: "Organic Dates", 
-    price: 1099, 
-    rating: 4.8,
-    reviews: 167,
-    description: "100% organic certified",
-    weight: "500g",
-    emoji: "🌴"
-  },
+interface Product {
+  id: number;
+  name: string;
+  basePrice: number;
+  description: string;
+  image: string;
+}
+
+const datesProducts: Product[] = [
+  { id: 1, name: "AJWA PREMIUM", basePrice: 210, description: "AJWA premium dates", image: DatesImg },
+  { id: 2, name: "AJWA PSEL", basePrice: 200, description: "AJWA psel dates", image: DatesImg },
+  { id: 3, name: "AJWA MEDIUM", basePrice: 150, description: "AJWA medium dates", image: DatesImg },
+  { id: 4, name: "PREMIUM MEJDOOL JORDAN JUMBO", basePrice: 195, description: "Premium Medjool Jordan jumbo", image: DatesImg },
+  { id: 5, name: "MEJDOOL JORDAN", basePrice: 180, description: "Medjool Jordan dates", image: DatesImg },
+  { id: 6, name: "JORDAN MEDIUM", basePrice: 175, description: "Jordan medium dates", image: DatesImg },
+  { id: 7, name: "PREMIUM MABROOM JUMBO", basePrice: 145, description: "Premium Mabroom jumbo", image: DatesImg },
+  { id: 8, name: "PREMIUM SAGAI", basePrice: 125, description: "Premium Sagai dates", image: DatesImg },
+  { id: 9, name: "SAFAWI", basePrice: 85, description: "Safawi dates", image: DatesImg },
+  { id: 10, name: "MEJDOOL SMALL", basePrice: 60, description: "Medjool small dates", image: DatesImg },
+  { id: 11, name: "FAZEL", basePrice: 50, description: "Fazel dates", image: DatesImg },
+  { id: 12, name: "SEMI SAFAWI", basePrice: 40, description: "Semi Safawi dates", image: DatesImg },
 ];
 
-const features = [
+interface Feature {
+  icon: any;
+  title: string;
+  description: string;
+}
+
+const features: Feature[] = [
   { icon: Palmtree, title: "Premium Quality", description: "Handpicked dates" },
   { icon: Truck, title: "Quick Delivery", description: "Fresh delivery" },
   { icon: Shield, title: "Quality Tested", description: "Lab tested" },
   { icon: Award, title: "Premium Grade", description: "Best varieties" },
 ];
 
-const benefits = [
+const benefits: Feature[] = [
   { icon: Sun, title: "Natural Energy", description: "Rich in natural sugars" },
   { icon: Sparkles, title: "Pure & Fresh", description: "No preservatives" },
   { icon: Leaf, title: "Health Benefits", description: "Nutrient-rich superfood" },
 ];
 
 const Dates = () => {
-  const [quantities, setQuantities] = useState({});
-  const [favorites, setFavorites] = useState(new Set());
-  const [cartItems, setCartItems] = useState(new Set());
+  const [selectedGrams, setSelectedGrams] = useState<Record<number, number>>({});
+  const [favorites, setFavorites] = useState<Set<number>>(new Set());
 
-  const incrementQuantity = (productId) => {
-    const current = parseInt(quantities[productId] || "1");
-    if (current < 10) {
-      setQuantities((prev) => ({ ...prev, [productId]: (current + 1).toString() }));
-    }
-  };
-
-  const decrementQuantity = (productId) => {
-    const current = parseInt(quantities[productId] || "1");
-    if (current > 1) {
-      setQuantities((prev) => ({ ...prev, [productId]: (current - 1).toString() }));
-    }
-  };
-
-  const toggleFavorite = (productId) => {
+  const toggleFavorite = (productId: number) => {
     setFavorites((prev) => {
       const newFavorites = new Set(prev);
       if (newFavorites.has(productId)) {
@@ -136,15 +64,23 @@ const Dates = () => {
     });
   };
 
-  const addToCart = (productId) => {
-    setCartItems((prev) => new Set([...prev, productId]));
-    setTimeout(() => {
-      setCartItems((prev) => {
-        const newCart = new Set(prev);
-        newCart.delete(productId);
-        return newCart;
-      });
-    }, 2000);
+  const setGramsFor = (productId: number, grams: number) => {
+    setSelectedGrams((prev) => ({ ...prev, [productId]: grams }));
+  };
+
+  const getPrice = (product: Product, grams?: number) => {
+    const g = grams || 100;
+    const raw = product.basePrice * (g / 100);
+    return Math.round(raw);
+  };
+
+  const contactWhatsApp = (productId: number) => {
+    const product = datesProducts.find((p) => p.id === productId);
+    const grams = selectedGrams[productId] || 100;
+    const price = getPrice(product, grams);
+    const msg = `Hello, I'm interested in ${product.name} - ${grams}g (Total: ₹${price}). Please assist with ordering.`;
+    const url = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+    window.open(url, "_blank");
   };
 
   return (
@@ -264,21 +200,6 @@ const Dates = () => {
               key={product.id} 
               className="group overflow-hidden hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-amber-200 dark:hover:border-amber-700 relative"
             >
-              {/* Badge */}
-              {product.badge && (
-                <div className={`absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-semibold ${
-                  product.badge === "Best Seller" 
-                    ? "bg-gradient-to-r from-amber-500 to-yellow-500 text-white" 
-                    : product.badge === "Premium"
-                    ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white"
-                    : product.badge === "Popular"
-                    ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white"
-                    : "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
-                }`}>
-                  {product.badge}
-                </div>
-              )}
-
               {/* Favorite Button */}
               <button
                 onClick={() => toggleFavorite(product.id)}
@@ -295,8 +216,12 @@ const Dates = () => {
 
               <div className="aspect-square overflow-hidden bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-slate-700 dark:to-slate-600 relative">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.1)_0%,_transparent_70%)]"></div>
-                <div className="w-full h-full flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500 relative z-10">
-                  {product.emoji}
+                <div className="w-full h-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500 relative z-10">
+                  {product.image ? (
+                    <img src={product.image} alt={product.name} className="max-w-3/4 max-h-3/4 object-contain" />
+                  ) : (
+                    <div className="text-8xl">🌴</div>
+                  )}
                 </div>
               </div>
 
@@ -310,74 +235,46 @@ const Dates = () => {
                       {product.description}
                     </p>
                     <span className="inline-block bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-xs font-semibold px-2 py-1 rounded-full">
-                      {product.weight}
+                      Select size below
                     </span>
                   </div>
-                </div>
-
-                <div className="flex items-center gap-2 mb-3 mt-3">
-                  <div className="flex items-center gap-1">
-                    <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-                    <span className="text-sm font-semibold text-slate-900 dark:text-white">
-                      {product.rating}
-                    </span>
-                  </div>
-                  <span className="text-xs text-slate-500 dark:text-slate-400">
-                    ({product.reviews} reviews)
-                  </span>
                 </div>
 
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl font-bold bg-gradient-to-r from-amber-600 to-yellow-600 bg-clip-text text-transparent">
-                    ₹{product.price}
+                    ₹{getPrice(product, selectedGrams[product.id] || 100)}
                   </span>
-                  <span className="text-sm text-slate-500 dark:text-slate-400">/{product.weight}</span>
+                  <span className="text-sm text-slate-500 dark:text-slate-400">
+                    /{(selectedGrams[product.id] || 100) >= 1000 ? `${(selectedGrams[product.id] || 100)/1000}kg` : `${selectedGrams[product.id] || 100}g`}
+                  </span>
                 </div>
               </CardContent>
 
               <CardFooter className="p-5 pt-0 flex flex-col gap-3">
-                {/* Quantity Selector */}
-                <div className="flex items-center gap-2 w-full">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => decrementQuantity(product.id)}
-                    className="h-10 w-10 rounded-full hover:bg-amber-50 dark:hover:bg-amber-900/20 border-2"
-                  >
-                    <Minus className="h-4 w-4" />
-                  </Button>
-                  <div className="flex-1 text-center">
-                    <span className="text-xl font-bold text-slate-900 dark:text-white">
-                      {quantities[product.id] || "1"}
-                    </span>
-                  </div>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => incrementQuantity(product.id)}
-                    className="h-10 w-10 rounded-full hover:bg-amber-50 dark:hover:bg-amber-900/20 border-2"
-                  >
-                    <Plus className="h-4 w-4" />
-                  </Button>
+                <div className="flex items-center gap-2 w-full flex-wrap">
+                  {[100,200,250,500,1000].map((g) => {
+                    const isSelected = (selectedGrams[product.id] || 100) === g;
+                    return (
+                      <Button
+                        key={g}
+                        variant={isSelected ? undefined : "outline"}
+                        onClick={() => setGramsFor(product.id, g)}
+                        className={`h-10 px-3 rounded-full text-sm font-semibold ${
+                          isSelected ? "bg-amber-600 text-white" : ""
+                        }`}
+                      >
+                        {g >= 1000 ? `${g/1000}kg` : `${g}g`}
+                      </Button>
+                    );
+                  })}
                 </div>
 
-                <Button 
-                  onClick={() => addToCart(product.id)}
-                  disabled={cartItems.has(product.id)}
-                  className={`w-full rounded-full font-semibold transition-all duration-300 ${
-                    cartItems.has(product.id)
-                      ? "bg-amber-500 hover:bg-amber-600"
-                      : "bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 hover:shadow-lg hover:shadow-amber-500/30"
-                  }`}
+                <Button
+                  onClick={() => contactWhatsApp(product.id)}
+                  className="w-full rounded-full font-semibold bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600"
                 >
-                  {cartItems.has(product.id) ? (
-                    <>Added to Cart ✓</>
-                  ) : (
-                    <>
-                      <ShoppingCart className="mr-2 h-4 w-4" />
-                      Add to Cart
-                    </>
-                  )}
+                  <Phone className="mr-2 h-4 w-4" />
+                  Contact WhatsApp
                 </Button>
               </CardFooter>
             </Card>

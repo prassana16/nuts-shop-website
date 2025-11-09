@@ -1,95 +1,25 @@
 import { useState } from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Heart, Star, Sprout, Truck, Shield, Crown, Plus, Minus, ChevronRight, Droplet, Sparkles } from "lucide-react";
+import { Heart, Star, Sprout, Truck, Shield, Crown, ChevronRight, Droplet, Sparkles, Phone } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import DatesImg from "@/assets/dates.jpg";
 
+// Replacing perfumeProducts with the date product list (basePrice per 100g)
 const perfumeProducts = [
-  { 
-    id: 1, 
-    name: "Royal Oud", 
-    price: 2999, 
-    rating: 4.9,
-    reviews: 245,
-    description: "Rich, woody fragrance with royal oud",
-    badge: "Best Seller",
-    volume: "100ml",
-    emoji: "🌹"
-  },
-  { 
-    id: 2, 
-    name: "Arabian Nights", 
-    price: 3499, 
-    rating: 4.8,
-    reviews: 198,
-    description: "Exotic blend of oriental spices",
-    volume: "100ml",
-    emoji: "✨"
-  },
-  { 
-    id: 3, 
-    name: "Desert Rose", 
-    price: 2799, 
-    rating: 4.7,
-    reviews: 156,
-    description: "Floral fragrance with rose and amber",
-    badge: "Premium",
-    volume: "75ml",
-    emoji: "🌺"
-  },
-  { 
-    id: 4, 
-    name: "Ocean Breeze", 
-    price: 2499, 
-    rating: 4.9,
-    reviews: 203,
-    description: "Fresh aquatic scent with citrus notes",
-    volume: "100ml",
-    emoji: "🌊"
-  },
-  { 
-    id: 5, 
-    name: "Midnight Mystique", 
-    price: 3999, 
-    rating: 4.8,
-    reviews: 287,
-    description: "Mysterious blend of vanilla and musk",
-    badge: "Popular",
-    volume: "100ml",
-    emoji: "🌙"
-  },
-  { 
-    id: 6, 
-    name: "Golden Amber", 
-    price: 3299, 
-    rating: 4.6,
-    reviews: 134,
-    description: "Warm amber with sweet undertones",
-    volume: "75ml",
-    emoji: "✨"
-  },
-  { 
-    id: 7, 
-    name: "Royal Jasmine", 
-    price: 2899, 
-    rating: 4.7,
-    reviews: 98,
-    description: "Pure jasmine with subtle notes",
-    badge: "New",
-    volume: "100ml",
-    emoji: "🌸"
-  },
-  { 
-    id: 8, 
-    name: "Black Orchid", 
-    price: 4499, 
-    rating: 4.8,
-    reviews: 167,
-    description: "Luxurious blend of orchid and spices",
-    volume: "100ml",
-    emoji: "🖤"
-  },
+  { id: 1, name: "AJWA PREMIUM", basePrice: 210, description: "AJWA premium dates", image: DatesImg },
+  { id: 2, name: "AJWA PSEL", basePrice: 200, description: "AJWA psel dates", image: DatesImg },
+  { id: 3, name: "AJWA MEDIUM", basePrice: 150, description: "AJWA medium dates", image: DatesImg },
+  { id: 4, name: "PREMIUM MEJDOOL JORDAN JUMBO", basePrice: 195, description: "Premium Medjool Jordan jumbo", image: DatesImg },
+  { id: 5, name: "MEJDOOL JORDAN", basePrice: 180, description: "Medjool Jordan dates", image: DatesImg },
+  { id: 6, name: "JORDAN MEDIUM", basePrice: 175, description: "Jordan medium dates", image: DatesImg },
+  { id: 7, name: "PREMIUM MABROOM JUMBO", basePrice: 145, description: "Premium Mabroom jumbo", image: DatesImg },
+  { id: 8, name: "PREMIUM SAGAI", basePrice: 125, description: "Premium Sagai dates", image: DatesImg },
+  { id: 9, name: "SAFAWI", basePrice: 85, description: "Safawi dates", image: DatesImg },
+  { id: 10, name: "MEJDOOL SMALL", basePrice: 60, description: "Medjool small dates", image: DatesImg },
+  { id: 11, name: "FAZEL", basePrice: 50, description: "Fazel dates", image: DatesImg },
+  { id: 12, name: "SEMI SAFAWI", basePrice: 40, description: "Semi Safawi dates", image: DatesImg },
 ];
 
 const features = [
@@ -106,23 +36,9 @@ const highlights = [
 ];
 
 const Perfume = () => {
-  const [quantities, setQuantities] = useState({});
+  // selectedGrams: store gram selection per product (defaults to 100g)
+  const [selectedGrams, setSelectedGrams] = useState({});
   const [favorites, setFavorites] = useState(new Set());
-  const [cartItems, setCartItems] = useState(new Set());
-
-  const incrementQuantity = (productId) => {
-    const current = parseInt(quantities[productId] || "1");
-    if (current < 10) {
-      setQuantities((prev) => ({ ...prev, [productId]: (current + 1).toString() }));
-    }
-  };
-
-  const decrementQuantity = (productId) => {
-    const current = parseInt(quantities[productId] || "1");
-    if (current > 1) {
-      setQuantities((prev) => ({ ...prev, [productId]: (current - 1).toString() }));
-    }
-  };
 
   const toggleFavorite = (productId) => {
     setFavorites((prev) => {
@@ -136,15 +52,23 @@ const Perfume = () => {
     });
   };
 
-  const addToCart = (productId) => {
-    setCartItems((prev) => new Set([...prev, productId]));
-    setTimeout(() => {
-      setCartItems((prev) => {
-        const newCart = new Set(prev);
-        newCart.delete(productId);
-        return newCart;
-      });
-    }, 2000);
+  const setGramsFor = (productId, grams) => {
+    setSelectedGrams((prev) => ({ ...prev, [productId]: grams }));
+  };
+
+  const getPrice = (product, grams) => {
+    const g = grams || 100;
+    const raw = product.basePrice * (g / 100);
+    return Math.round(raw);
+  };
+
+  const contactWhatsApp = (productId) => {
+    const product = perfumeProducts.find((p) => p.id === productId);
+    const grams = selectedGrams[productId] || 100;
+    const price = getPrice(product, grams);
+    const msg = `Hello, I'm interested in ${product.name} - ${grams}g (Total: ₹${price}). Please assist with ordering.`;
+    const url = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+    window.open(url, "_blank");
   };
 
   return (
@@ -264,21 +188,6 @@ const Perfume = () => {
               key={product.id} 
               className="group overflow-hidden hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-purple-200 dark:hover:border-purple-700 relative"
             >
-              {/* Badge */}
-              {product.badge && (
-                <div className={`absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-semibold ${
-                  product.badge === "Best Seller" 
-                    ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white" 
-                    : product.badge === "Premium"
-                    ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white"
-                    : product.badge === "Popular"
-                    ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white"
-                    : "bg-gradient-to-r from-green-500 to-emerald-500 text-white"
-                }`}>
-                  {product.badge}
-                </div>
-              )}
-
               {/* Favorite Button */}
               <button
                 onClick={() => toggleFavorite(product.id)}
@@ -294,10 +203,12 @@ const Perfume = () => {
               </button>
 
               <div className="aspect-square overflow-hidden bg-gradient-to-br from-purple-50 to-pink-50 dark:from-slate-700 dark:to-slate-600 relative">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.1)_0%,_transparent_70%)]"></div>
-                <div className="w-full h-full flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500 relative z-10">
-                  {product.emoji}
-                </div>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.06)_0%,_transparent_70%)]"></div>
+                {product.image ? (
+                  <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 relative z-10" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-6xl relative z-10">🍇</div>
+                )}
               </div>
 
               <CardContent className="p-5">
@@ -309,75 +220,40 @@ const Perfume = () => {
                     <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">
                       {product.description}
                     </p>
-                    <span className="inline-block bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 text-xs font-semibold px-2 py-1 rounded-full">
-                      {product.volume}
-                    </span>
                   </div>
-                </div>
-
-                <div className="flex items-center gap-2 mb-3 mt-3">
-                  <div className="flex items-center gap-1">
-                    <Star className="h-4 w-4 fill-purple-400 text-purple-400" />
-                    <span className="text-sm font-semibold text-slate-900 dark:text-white">
-                      {product.rating}
-                    </span>
-                  </div>
-                  <span className="text-xs text-slate-500 dark:text-slate-400">
-                    ({product.reviews} reviews)
-                  </span>
                 </div>
 
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                    ₹{product.price}
+                    ₹{getPrice(product, selectedGrams[product.id] || 100)}
                   </span>
-                  <span className="text-sm text-slate-500 dark:text-slate-400">/{product.volume}</span>
+                  <span className="text-sm text-slate-500 dark:text-slate-400">/{(selectedGrams[product.id] || 100) >= 1000 ? `${(selectedGrams[product.id] || 100)/1000}kg` : `${selectedGrams[product.id] || 100}g`}</span>
                 </div>
               </CardContent>
 
               <CardFooter className="p-5 pt-0 flex flex-col gap-3">
-                {/* Quantity Selector */}
-                <div className="flex items-center gap-2 w-full">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => decrementQuantity(product.id)}
-                    className="h-10 w-10 rounded-full hover:bg-purple-50 dark:hover:bg-purple-900/20 border-2"
-                  >
-                    <Minus className="h-4 w-4" />
-                  </Button>
-                  <div className="flex-1 text-center">
-                    <span className="text-xl font-bold text-slate-900 dark:text-white">
-                      {quantities[product.id] || "1"}
-                    </span>
-                  </div>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => incrementQuantity(product.id)}
-                    className="h-10 w-10 rounded-full hover:bg-purple-50 dark:hover:bg-purple-900/20 border-2"
-                  >
-                    <Plus className="h-4 w-4" />
-                  </Button>
+                <div className="flex items-center gap-2 w-full flex-wrap">
+                  {[100,200,250,500,1000].map((g) => {
+                    const isSelected = (selectedGrams[product.id] || 100) === g;
+                    return (
+                      <Button
+                        key={g}
+                        variant={isSelected ? undefined : "outline"}
+                        onClick={() => setGramsFor(product.id, g)}
+                        className={`h-10 px-3 rounded-full text-sm font-semibold ${isSelected ? "bg-purple-600 text-white" : ""}`}
+                      >
+                        {g >= 1000 ? `${g/1000}kg` : `${g}g`}
+                      </Button>
+                    );
+                  })}
                 </div>
 
                 <Button 
-                  onClick={() => addToCart(product.id)}
-                  disabled={cartItems.has(product.id)}
-                  className={`w-full rounded-full font-semibold transition-all duration-300 ${
-                    cartItems.has(product.id)
-                      ? "bg-purple-500 hover:bg-purple-600"
-                      : "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 hover:shadow-lg hover:shadow-purple-500/30"
-                  }`}
+                  onClick={() => contactWhatsApp(product.id)}
+                  className="w-full rounded-full font-semibold transition-all duration-300 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600"
                 >
-                  {cartItems.has(product.id) ? (
-                    <>Added to Cart ✓</>
-                  ) : (
-                    <>
-                      <ShoppingCart className="mr-2 h-4 w-4" />
-                      Add to Cart
-                    </>
-                  )}
+                  <Phone className="mr-2 h-4 w-4" />
+                  Contact WhatsApp
                 </Button>
               </CardFooter>
             </Card>

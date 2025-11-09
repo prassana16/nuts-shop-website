@@ -1,94 +1,61 @@
 import { useState } from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Heart, Star, Leaf, Truck, Shield, Award, Plus, Minus, ChevronRight, Flame, Apple } from "lucide-react";
+import { Heart, Star, Leaf, Truck, Shield, Award, ChevronRight, Flame, Apple, Phone } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CashewImg from "@/assets/Cashew.png";
+import PistaImg from "@/assets/Pista.png";
+import AlmondImg from "@/assets/Almond.png";
+import NutsImg from "@/assets/nuts.jpg";
+import MixedImg from "@/assets/mixed.png";
+// product list: basePrice is price per 100g
 const nutsProducts = [
-  { 
-    id: 1, 
-    name: "Premium Almonds", 
-    price: 599, 
-    rating: 4.9,
-    reviews: 245,
-    description: "California almonds, rich in protein",
-    badge: "Best Seller",
-    weight: "500g",
-    emoji: "🥜"
-  },
-  { 
-    id: 2, 
-    name: "Roasted Cashews", 
-    price: 749, 
-    rating: 4.8,
-    reviews: 198,
-    description: "Lightly salted, premium quality",
-    weight: "500g",
-    emoji: "🥜"
-  },
-  { 
-    id: 3, 
-    name: "Raw Walnuts", 
-    price: 679, 
-    rating: 4.7,
-    reviews: 156,
-    description: "Heart-healthy omega-3 rich",
-    badge: "Premium",
-    weight: "500g",
-    emoji: "🌰"
-  },
-  { 
-    id: 4, 
-    name: "Pistachios", 
-    price: 849, 
-    rating: 4.9,
-    reviews: 203,
-    description: "Turkish pistachios, shell-on",
-    weight: "500g",
-    emoji: "🥜"
-  },
-  { 
-    id: 5, 
-    name: "Mixed Nuts", 
-    price: 699, 
-    rating: 4.8,
-    reviews: 287,
-    description: "Perfect blend of 6 premium nuts",
-    badge: "Popular",
-    weight: "500g",
-    emoji: "🥜"
-  },
-  { 
-    id: 6, 
-    name: "Roasted Hazelnuts", 
-    price: 629, 
-    rating: 4.6,
-    reviews: 134,
-    description: "Crunchy and flavorful",
-    weight: "500g",
-    emoji: "🌰"
-  },
-  { 
-    id: 7, 
-    name: "Brazil Nuts", 
-    price: 799, 
-    rating: 4.7,
-    reviews: 98,
-    description: "Selenium-rich superfood",
-    badge: "New",
-    weight: "500g",
-    emoji: "🥜"
-  },
-  { 
-    id: 8, 
-    name: "Pecans", 
-    price: 899, 
-    rating: 4.8,
-    reviews: 167,
-    description: "Premium American pecans",
-    weight: "500g",
-    emoji: "🌰"
-  },
+  // Cashew
+  { id: 1, name: "GARLIC CHILLI KO", basePrice: 160, description: "Garlic chilli flavored cashew", image: CashewImg },
+  { id: 2, name: "CHILLI CASHEW", basePrice: 185, description: "Spicy chilli cashew", image: CashewImg },
+  { id: 3, name: "PERI PERI", basePrice: 160, description: "Peri peri roasted cashew", image: CashewImg },
+  { id: 4, name: "GREEN CHILLI", basePrice: 160, description: "Green chilli cashew", image: CashewImg },
+  { id: 5, name: "TOMATO CHILLI", basePrice: 160, description: "Tomato chilli cashew", image: CashewImg },
+  { id: 6, name: "CASHEW SPICY ROASTED", basePrice: 160, description: "Spicy roasted cashew", image: CashewImg },
+  { id: 7, name: "CASHEW SALT ROASTED", basePrice: 160, description: "Salt roasted cashew", image: CashewImg },
+  { id: 8, name: "CASHEW CHEESE ROASTED", basePrice: 160, description: "Cheese roasted cashew", image: CashewImg },
+  { id: 9, name: "CASHEW BBQ ROASTED", basePrice: 160, description: "BBQ roasted cashew", image: CashewImg },
+  { id: 10, name: "GARLIC CHILLI PSEL", basePrice: 185, description: "Garlic chilli special", image: CashewImg },
+  { id: 11, name: "CASHEW PEPPER", basePrice: 185, description: "Pepper cashew", image: CashewImg },
+  { id: 12, name: "CASHEW MIX", basePrice: 160, description: "Mixed cashew pack", image: CashewImg },
+  { id: 13, name: "CASHEW PEPPER ROASTED", basePrice: 160, description: "Pepper roasted cashew", image: CashewImg },
+  { id: 14, name: "W180", basePrice: 145, description: "W180 grade cashew", image: CashewImg },
+  { id: 15, name: "PLAIN KAJU", basePrice: 170, description: "Plain kaju", image: CashewImg },
+  { id: 16, name: "CASHEW SPLIT KO", basePrice: 116, description: "Split cashew", image: CashewImg },
+  { id: 17, name: "CASHEW BORMA", basePrice: 130, description: "Cashew borma", image: CashewImg },
+
+  // Pista
+  { id: 18, name: "PLAIN RAW PISTACHIO", basePrice: 194, description: "Plain raw pista", image: PistaImg },
+  { id: 19, name: "PISTACHIO WITHOUT SHELL", basePrice: 268, description: "Pistachio without shell", image: PistaImg },
+  { id: 20, name: "PISTACHIO SALTED", basePrice: 190, description: "Salted pistachio", image: PistaImg },
+  { id: 21, name: "PISTACHIO LEMON", basePrice: 190, description: "Lemon pistachio", image: PistaImg },
+  { id: 22, name: "PISTACHIO MIX", basePrice: 190, description: "Pistachio mix", image: PistaImg },
+
+  // Almond
+  { id: 23, name: "PREMIUM RAW ALMOND", basePrice: 130, description: "Premium raw almond", image: AlmondImg },
+  { id: 24, name: "USA SMALL ALMOND", basePrice: 110, description: "USA small almond", image: AlmondImg },
+  { id: 25, name: "ALMOND SALT ROASTED", basePrice: 140, description: "Salt roasted almond", image: AlmondImg },
+
+  // Hazel
+  { id: 26, name: "PREMIUM WHOLE HAZELNUT", basePrice: 215, description: "Premium whole hazelnut", image: NutsImg },
+
+  // Walnut
+  { id: 27, name: "WALNUT CHILLIE", basePrice: 250, description: "Walnut chillie", image: NutsImg },
+
+  // Others / Seeds
+  { id: 28, name: "PUMPKIN SEEDS", basePrice: 75, description: "Pumpkin seeds", image: MixedImg },
+  { id: 29, name: "SUNFLOWER SEEDS", basePrice: 50, description: "Sunflower seeds", image: MixedImg },
+  { id: 30, name: "WATERMELON SEEDS", basePrice: 124, description: "Watermelon seeds", image: MixedImg },
+  { id: 31, name: "CHIA SEEDS", basePrice: 60, description: "Chia seeds", image: MixedImg },
+  { id: 32, name: "FLAX SEEDS", basePrice: 30, description: "Flax seeds", image: MixedImg },
+  { id: 33, name: "PLAIN NUTS MIX", basePrice: 150, description: "Plain nuts mix", image: MixedImg },
+  { id: 34, name: "MACADAMIA", basePrice: 210, description: "Premium macadamia nuts", image: NutsImg },
 ];
 
 const features = [
@@ -105,23 +72,9 @@ const healthBenefits = [
 ];
 
 const Nuts = () => {
-  const [quantities, setQuantities] = useState({});
+  // selectedGrams: store gram selection per product (defaults to 100g)
+  const [selectedGrams, setSelectedGrams] = useState({});
   const [favorites, setFavorites] = useState(new Set());
-  const [cartItems, setCartItems] = useState(new Set());
-
-  const incrementQuantity = (productId) => {
-    const current = parseInt(quantities[productId] || "1");
-    if (current < 10) {
-      setQuantities((prev) => ({ ...prev, [productId]: (current + 1).toString() }));
-    }
-  };
-
-  const decrementQuantity = (productId) => {
-    const current = parseInt(quantities[productId] || "1");
-    if (current > 1) {
-      setQuantities((prev) => ({ ...prev, [productId]: (current - 1).toString() }));
-    }
-  };
 
   const toggleFavorite = (productId) => {
     setFavorites((prev) => {
@@ -135,15 +88,24 @@ const Nuts = () => {
     });
   };
 
-  const addToCart = (productId) => {
-    setCartItems((prev) => new Set([...prev, productId]));
-    setTimeout(() => {
-      setCartItems((prev) => {
-        const newCart = new Set(prev);
-        newCart.delete(productId);
-        return newCart;
-      });
-    }, 2000);
+  const setGramsFor = (productId, grams) => {
+    setSelectedGrams((prev) => ({ ...prev, [productId]: grams }));
+  };
+
+  const getPrice = (product, grams) => {
+    const g = grams || 100;
+    // price = basePrice per 100g * (grams / 100)
+    const raw = product.basePrice * (g / 100);
+    return Math.round(raw);
+  };
+
+  const contactWhatsApp = (productId) => {
+    const product = nutsProducts.find((p) => p.id === productId);
+    const grams = selectedGrams[productId] || 100;
+    const price = getPrice(product, grams);
+    const msg = `Hello, I'm interested in ${product.name} - ${grams}g (Total: ₹${price}). Please assist with ordering.`;
+    const url = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+    window.open(url, "_blank");
   };
 
   return (
@@ -264,19 +226,8 @@ const Nuts = () => {
               className="group overflow-hidden hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-green-200 dark:hover:border-green-700 relative"
             >
               {/* Badge */}
-              {product.badge && (
-                <div className={`absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-semibold ${
-                  product.badge === "Best Seller" 
-                    ? "bg-gradient-to-r from-green-500 to-emerald-500 text-white" 
-                    : product.badge === "Premium"
-                    ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white"
-                    : product.badge === "Popular"
-                    ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white"
-                    : "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
-                }`}>
-                  {product.badge}
-                </div>
-              )}
+              {/* optional badge removed - products use basePrice only */}
+              {/* Badge removed */}
 
               {/* Favorite Button */}
               <button
@@ -294,8 +245,12 @@ const Nuts = () => {
 
               <div className="aspect-square overflow-hidden bg-gradient-to-br from-green-50 to-emerald-50 dark:from-slate-700 dark:to-slate-600 relative">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.1)_0%,_transparent_70%)]"></div>
-                <div className="w-full h-full flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500 relative z-10">
-                  {product.emoji}
+                <div className="w-full h-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500 relative z-10">
+                  {product.image ? (
+                    <img src={product.image} alt={product.name} className="max-w-3/4 max-h-3/4 object-contain" />
+                  ) : (
+                    <div className="text-8xl">🥜</div>
+                  )}
                 </div>
               </div>
 
@@ -309,74 +264,43 @@ const Nuts = () => {
                       {product.description}
                     </p>
                     <span className="inline-block bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold px-2 py-1 rounded-full">
-                      {product.weight}
+                      Select size below
                     </span>
                   </div>
-                </div>
-
-                <div className="flex items-center gap-2 mb-3 mt-3">
-                  <div className="flex items-center gap-1">
-                    <Star className="h-4 w-4 fill-green-400 text-green-400" />
-                    <span className="text-sm font-semibold text-slate-900 dark:text-white">
-                      {product.rating}
-                    </span>
-                  </div>
-                  <span className="text-xs text-slate-500 dark:text-slate-400">
-                    ({product.reviews} reviews)
-                  </span>
                 </div>
 
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                    ₹{product.price}
+                    ₹{getPrice(product, selectedGrams[product.id] || 100)}
                   </span>
-                  <span className="text-sm text-slate-500 dark:text-slate-400">/{product.weight}</span>
+                  <span className="text-sm text-slate-500 dark:text-slate-400">/{(selectedGrams[product.id] || 100) >= 1000 ? `${(selectedGrams[product.id] || 100)/1000}kg` : `${selectedGrams[product.id] || 100}g`}</span>
                 </div>
               </CardContent>
 
               <CardFooter className="p-5 pt-0 flex flex-col gap-3">
-                {/* Quantity Selector */}
-                <div className="flex items-center gap-2 w-full">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => decrementQuantity(product.id)}
-                    className="h-10 w-10 rounded-full hover:bg-green-50 dark:hover:bg-green-900/20 border-2"
-                  >
-                    <Minus className="h-4 w-4" />
-                  </Button>
-                  <div className="flex-1 text-center">
-                    <span className="text-xl font-bold text-slate-900 dark:text-white">
-                      {quantities[product.id] || "1"}
-                    </span>
-                  </div>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => incrementQuantity(product.id)}
-                    className="h-10 w-10 rounded-full hover:bg-green-50 dark:hover:bg-green-900/20 border-2"
-                  >
-                    <Plus className="h-4 w-4" />
-                  </Button>
+                {/* Gram size selector */}
+                <div className="flex items-center gap-2 w-full flex-wrap">
+                  {[100, 200, 250, 500, 1000].map((g) => {
+                    const isSelected = (selectedGrams[product.id] || 100) === g;
+                    return (
+                      <Button
+                        key={g}
+                        variant={isSelected ? undefined : "outline"}
+                        onClick={() => setGramsFor(product.id, g)}
+                        className={`h-10 px-3 rounded-full text-sm font-semibold ${isSelected ? "bg-green-600 text-white" : ""}`}
+                      >
+                        {g >= 1000 ? `${g/1000}kg` : `${g}g`}
+                      </Button>
+                    );
+                  })}
                 </div>
 
-                <Button 
-                  onClick={() => addToCart(product.id)}
-                  disabled={cartItems.has(product.id)}
-                  className={`w-full rounded-full font-semibold transition-all duration-300 ${
-                    cartItems.has(product.id)
-                      ? "bg-green-500 hover:bg-green-600"
-                      : "bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 hover:shadow-lg hover:shadow-green-500/30"
-                  }`}
+                <Button
+                  onClick={() => contactWhatsApp(product.id)}
+                  className={`w-full rounded-full font-semibold transition-all duration-300 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 hover:shadow-lg hover:shadow-green-500/30`}
                 >
-                  {cartItems.has(product.id) ? (
-                    <>Added to Cart ✓</>
-                  ) : (
-                    <>
-                      <ShoppingCart className="mr-2 h-4 w-4" />
-                      Add to Cart
-                    </>
-                  )}
+                  <Phone className="mr-2 h-4 w-4" />
+                  Contact WhatsApp
                 </Button>
               </CardFooter>
             </Card>

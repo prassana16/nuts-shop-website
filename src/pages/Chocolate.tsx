@@ -1,78 +1,43 @@
 import { useState } from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Heart, Star, Package, Truck, Shield, Award, Plus, Minus, ChevronRight } from "lucide-react";
+import { Heart, Package, Truck, Shield, Award, ChevronRight, Phone } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ChocolateImg from "../assets/chocolate.jpg";
 const chocolateProducts = [
-  { 
-    id: 1, 
-    name: "Dark Chocolate Bar", 
-    price: 299, 
-    rating: 4.8,
-    reviews: 128,
-    description: "Rich 70% cocoa dark chocolate",
-    badge: "Best Seller"
-  },
-  { 
-    id: 2, 
-    name: "Milk Chocolate Bar", 
-    price: 249, 
-    rating: 4.6,
-    reviews: 95,
-    description: "Creamy and smooth milk chocolate"
-  },
-  { 
-    id: 3, 
-    name: "White Chocolate Bar", 
-    price: 279, 
-    rating: 4.5,
-    reviews: 82,
-    description: "Pure white chocolate delight"
-  },
-  { 
-    id: 4, 
-    name: "Hazelnut Chocolate", 
-    price: 349, 
-    rating: 4.9,
-    reviews: 156,
-    description: "Crunchy hazelnuts in milk chocolate",
-    badge: "Premium"
-  },
-  { 
-    id: 5, 
-    name: "Almond Chocolate", 
-    price: 329, 
-    rating: 4.7,
-    reviews: 103,
-    description: "Roasted almonds with dark chocolate"
-  },
-  { 
-    id: 6, 
-    name: "Caramel Chocolate", 
-    price: 299, 
-    rating: 4.8,
-    reviews: 142,
-    description: "Smooth caramel filled chocolate",
-    badge: "New"
-  },
-  { 
-    id: 7, 
-    name: "Orange Chocolate", 
-    price: 279, 
-    rating: 4.4,
-    reviews: 67,
-    description: "Zesty orange infused dark chocolate"
-  },
-  { 
-    id: 8, 
-    name: "Mint Chocolate", 
-    price: 289, 
-    rating: 4.6,
-    reviews: 89,
-    description: "Refreshing mint with dark chocolate"
-  },
+  { id: 1, name: "TIFFANY DELUXE", basePrice: 40, description: "Tiffany Deluxe Chocolate", image: ChocolateImg },
+  { id: 2, name: "COCON JELLY", basePrice: 40, description: "Coconut Jelly Chocolate", image: ChocolateImg },
+  { id: 3, name: "BONJEM", basePrice: 120, description: "Bonjem Special", image: ChocolateImg },
+  { id: 4, name: "THAI CHEW CANDY", basePrice: 70, description: "Thai Chew Candy", image: ChocolateImg },
+  { id: 5, name: "SWISS JELLY", basePrice: 65, description: "Swiss Jelly Candy", image: ChocolateImg },
+  { id: 6, name: "MOON", basePrice: 65, description: "Moon Chocolate", image: ChocolateImg },
+  { id: 7, name: "CREAM FUDGE", basePrice: 65, description: "Cream Fudge", image: ChocolateImg },
+  { id: 8, name: "BLUES", basePrice: 65, description: "Blues Chocolate", image: ChocolateImg },
+  { id: 9, name: "COCOA BEAN CHOCOLATE", basePrice: 65, description: "Pure Cocoa Bean Chocolate", image: ChocolateImg },
+  { id: 10, name: "BAYTIN", basePrice: 70, description: "Baytin Chocolate", image: ChocolateImg },
+  { id: 11, name: "TRUFFLE BALLS", basePrice: 70, description: "Chocolate Truffle Balls", image: ChocolateImg },
+  { id: 12, name: "LEXUS", basePrice: 70, description: "Lexus Premium Chocolate", image: ChocolateImg },
+  { id: 13, name: "LOPPYS", basePrice: 70, description: "Loppys Chocolate", image: ChocolateImg },
+  { id: 14, name: "FONDELLA", basePrice: 70, description: "Fondella Chocolate", image: ChocolateImg },
+  { id: 15, name: "MADEX", basePrice: 75, description: "Madex Premium", image: ChocolateImg },
+  { id: 16, name: "SAPPHIRE", basePrice: 75, description: "Sapphire Chocolate", image: ChocolateImg },
+  { id: 17, name: "COCOA BULLET", basePrice: 75, description: "Cocoa Bullet", image: ChocolateImg },
+  { id: 18, name: "AKSU", basePrice: 75, description: "Aksu Chocolate", image: ChocolateImg },
+  { id: 19, name: "HANDMADE", basePrice: 75, description: "Handmade Chocolate", image: ChocolateImg },
+  { id: 20, name: "MARISELLA", basePrice: 80, description: "Marisella Premium", image: ChocolateImg },
+  { id: 21, name: "SORAY", basePrice: 60, description: "Soray Chocolate", image: ChocolateImg },
+  { id: 22, name: "BOYS", basePrice: 60, description: "Boys Special Chocolate", image: ChocolateImg },
+  { id: 23, name: "GIRLS", basePrice: 60, description: "Girls Special Chocolate", image: ChocolateImg },
+  { id: 24, name: "STONE CANDY", basePrice: 40, description: "Stone Candy", image: ChocolateImg },
+  { id: 25, name: "LOVE CANDY", basePrice: 25, description: "Love Candy", image: ChocolateImg },
+  { id: 26, name: "LADIO DATES CHOCOLATE", basePrice: 120, description: "Ladio Dates Chocolate", image: ChocolateImg },
+  { id: 27, name: "SALSA DARK DATES CHOCOLATE", basePrice: 110, description: "Salsa Dark Dates Chocolate", image: ChocolateImg },
+  { id: 28, name: "SALSA YELLOW BROWN DATES CHOCOLATE", basePrice: 110, description: "Salsa Yellow Brown Dates", image: ChocolateImg },
+  { id: 29, name: "SALSA YELLOW DATES CHOCOLATE", basePrice: 110, description: "Salsa Yellow Dates", image: ChocolateImg },
+  { id: 30, name: "SALSA GOLD DATES CHOCOLATE", basePrice: 110, description: "Salsa Gold Dates", image: ChocolateImg },
+  { id: 31, name: "SALSA WHITE DATES CHOCOLATE", basePrice: 110, description: "Salsa White Dates", image: ChocolateImg },
+  { id: 32, name: "SALSA VALETINE RED DATES CHOCOLATE", basePrice: 110, description: "Salsa Valentine Red Dates", image: ChocolateImg },
 ];
 
 const features = [
@@ -83,27 +48,8 @@ const features = [
 ];
 
 const Chocolate = () => {
-  const [quantities, setQuantities] = useState({});
+  const [selectedGrams, setSelectedGrams] = useState({});
   const [favorites, setFavorites] = useState(new Set());
-  const [cartItems, setCartItems] = useState(new Set());
-
-  const handleQuantityChange = (productId, value) => {
-    setQuantities((prev) => ({ ...prev, [productId]: value }));
-  };
-
-  const incrementQuantity = (productId) => {
-    const current = parseInt(quantities[productId] || "1");
-    if (current < 10) {
-      setQuantities((prev) => ({ ...prev, [productId]: (current + 1).toString() }));
-    }
-  };
-
-  const decrementQuantity = (productId) => {
-    const current = parseInt(quantities[productId] || "1");
-    if (current > 1) {
-      setQuantities((prev) => ({ ...prev, [productId]: (current - 1).toString() }));
-    }
-  };
 
   const toggleFavorite = (productId) => {
     setFavorites((prev) => {
@@ -117,15 +63,23 @@ const Chocolate = () => {
     });
   };
 
-  const addToCart = (productId) => {
-    setCartItems((prev) => new Set([...prev, productId]));
-    setTimeout(() => {
-      setCartItems((prev) => {
-        const newCart = new Set(prev);
-        newCart.delete(productId);
-        return newCart;
-      });
-    }, 2000);
+  const setGramsFor = (productId, grams) => {
+    setSelectedGrams((prev) => ({ ...prev, [productId]: grams }));
+  };
+
+  const getPrice = (product, grams) => {
+    const g = grams || 100;
+    const raw = product.basePrice * (g / 100);
+    return Math.round(raw);
+  };
+
+  const contactWhatsApp = (productId) => {
+    const product = chocolateProducts.find((p) => p.id === productId);
+    const grams = selectedGrams[productId] || 100;
+    const price = getPrice(product, grams);
+    const msg = `Hello, I'm interested in ${product.name} - ${grams}g (Total: ₹${price}). Please assist with ordering.`;
+    const url = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+    window.open(url, "_blank");
   };
 
   return (
@@ -210,19 +164,6 @@ const Chocolate = () => {
               key={product.id} 
               className="group overflow-hidden hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-amber-200 dark:hover:border-amber-700 relative"
             >
-              {/* Badge */}
-              {product.badge && (
-                <div className={`absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-semibold ${
-                  product.badge === "Best Seller" 
-                    ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white" 
-                    : product.badge === "Premium"
-                    ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
-                    : "bg-gradient-to-r from-green-500 to-emerald-500 text-white"
-                }`}>
-                  {product.badge}
-                </div>
-              )}
-
               {/* Favorite Button */}
               <button
                 onClick={() => toggleFavorite(product.id)}
@@ -237,9 +178,14 @@ const Chocolate = () => {
                 />
               </button>
 
-              <div className="aspect-square overflow-hidden bg-gradient-to-br from-amber-50 to-orange-50 dark:from-slate-700 dark:to-slate-600">
-                <div className="w-full h-full flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
-                  🍫
+              <div className="aspect-square overflow-hidden bg-gradient-to-br from-amber-50 to-orange-50 dark:from-slate-700 dark:to-slate-600 relative">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.1)_0%,_transparent_70%)]"></div>
+                <div className="w-full h-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500 relative z-10">
+                  {product.image ? (
+                    <img src={product.image} alt={product.name} className="max-w-3/4 max-h-3/4 object-contain" />
+                  ) : (
+                    <div className="text-8xl">🍫</div>
+                  )}
                 </div>
               </div>
 
@@ -252,72 +198,47 @@ const Chocolate = () => {
                     <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">
                       {product.description}
                     </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="flex items-center gap-1">
-                    <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-                    <span className="text-sm font-semibold text-slate-900 dark:text-white">
-                      {product.rating}
+                    <span className="inline-block bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-xs font-semibold px-2 py-1 rounded-full">
+                      Select size below
                     </span>
                   </div>
-                  <span className="text-xs text-slate-500 dark:text-slate-400">
-                    ({product.reviews} reviews)
-                  </span>
                 </div>
 
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
-                    ₹{product.price}
+                    ₹{getPrice(product, selectedGrams[product.id] || 100)}
                   </span>
-                  <span className="text-sm text-slate-500 dark:text-slate-400">per bar</span>
+                  <span className="text-sm text-slate-500 dark:text-slate-400">
+                    /{(selectedGrams[product.id] || 100) >= 1000 ? `${(selectedGrams[product.id] || 100)/1000}kg` : `${selectedGrams[product.id] || 100}g`}
+                  </span>
                 </div>
               </CardContent>
 
               <CardFooter className="p-5 pt-0 flex flex-col gap-3">
-                {/* Quantity Selector */}
-                <div className="flex items-center gap-2 w-full">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => decrementQuantity(product.id)}
-                    className="h-10 w-10 rounded-full hover:bg-amber-50 dark:hover:bg-amber-900/20 border-2"
-                  >
-                    <Minus className="h-4 w-4" />
-                  </Button>
-                  <div className="flex-1 text-center">
-                    <span className="text-xl font-bold text-slate-900 dark:text-white">
-                      {quantities[product.id] || "1"}
-                    </span>
-                  </div>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => incrementQuantity(product.id)}
-                    className="h-10 w-10 rounded-full hover:bg-amber-50 dark:hover:bg-amber-900/20 border-2"
-                  >
-                    <Plus className="h-4 w-4" />
-                  </Button>
+                <div className="flex items-center gap-2 w-full flex-wrap">
+                  {[100,200,250,500,1000].map((g) => {
+                    const isSelected = (selectedGrams[product.id] || 100) === g;
+                    return (
+                      <Button
+                        key={g}
+                        variant={isSelected ? undefined : "outline"}
+                        onClick={() => setGramsFor(product.id, g)}
+                        className={`h-10 px-3 rounded-full text-sm font-semibold ${
+                          isSelected ? "bg-amber-600 text-white" : ""
+                        }`}
+                      >
+                        {g >= 1000 ? `${g/1000}kg` : `${g}g`}
+                      </Button>
+                    );
+                  })}
                 </div>
 
-                <Button 
-                  onClick={() => addToCart(product.id)}
-                  disabled={cartItems.has(product.id)}
-                  className={`w-full rounded-full font-semibold transition-all duration-300 ${
-                    cartItems.has(product.id)
-                      ? "bg-green-500 hover:bg-green-600"
-                      : "bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 hover:shadow-lg hover:shadow-amber-500/30"
-                  }`}
+                <Button
+                  onClick={() => contactWhatsApp(product.id)}
+                  className="w-full rounded-full font-semibold bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600"
                 >
-                  {cartItems.has(product.id) ? (
-                    <>Added to Cart ✓</>
-                  ) : (
-                    <>
-                      <ShoppingCart className="mr-2 h-4 w-4" />
-                      Add to Cart
-                    </>
-                  )}
+                  <Phone className="mr-2 h-4 w-4" />
+                  Contact WhatsApp
                 </Button>
               </CardFooter>
             </Card>

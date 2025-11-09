@@ -33,7 +33,7 @@ const HeroSlider = () => {
   };
 
   return (
-    <section id="home" className="relative w-full h-[400px] md:h-[600px] overflow-hidden">
+    <section id="home" className="relative w-full h-[400px] md:h-[600px] overflow-hidden mt-16 lg:mt-20">
       {/* Slides */}
       {slides.map((slide, index) => (
         <div
