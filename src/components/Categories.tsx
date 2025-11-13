@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import chocolateImg from "@/assets/Almond.png";
 import biscuitsImg from "@/assets/Biscuit.png";
 import nutsImg from "@/assets/Cashew.png";
@@ -10,16 +11,17 @@ import datesImg from "@/assets/Dates.png";
 import toysImg from "@/assets/Pista.png";
 
 const categories = [
-  { id: 1, name: "Chocolates", image: chocolateImg, description: "Premium chocolates from around the world" },
-  { id: 2, name: "Biscuits", image: biscuitsImg, description: "Delicious biscuits for every occasion" },
-  { id: 3, name: "Nuts", image: nutsImg, description: "Healthy and nutritious nuts" },
-  { id: 4, name: "Perfumes", image: perfumeImg, description: "Luxury fragrances for everyone" },
-  { id: 5, name: "Dates", image: datesImg, description: "Fresh and premium quality dates" },
-  { id: 6, name: "Toys", image: toysImg, description: "Fun toys for children of all ages" },
+  { id: 1, name: "Chocolates", image: chocolateImg, description: "Premium chocolates from around the world", path: "/chocolate" },
+  { id: 2, name: "Biscuits", image: biscuitsImg, description: "Delicious biscuits for every occasion", path: "/biscuits" },
+  { id: 3, name: "Nuts", image: nutsImg, description: "Healthy and nutritious nuts", path: "/nuts" },
+  { id: 4, name: "Perfumes", image: perfumeImg, description: "Luxury fragrances for everyone", path: "/perfumes" },
+  { id: 5, name: "Dates", image: datesImg, description: "Fresh and premium quality dates", path: "/dates" },
+  { id: 6, name: "Toys", image: toysImg, description: "Fun toys for children of all ages", path: "/toys" },
 ];
 
 const Categories = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
   const itemsPerView = 3;
 
   const nextSlide = () => {
@@ -32,6 +34,10 @@ const Categories = () => {
     setCurrentIndex((prev) =>
       prev === 0 ? Math.max(0, categories.length - itemsPerView) : prev - 1
     );
+  };
+
+  const handleCategoryClick = (path) => {
+    navigate(path);
   };
 
   return (
@@ -68,7 +74,8 @@ const Categories = () => {
                   {categories.map((category) => (
                     <Card
                       key={category.id}
-                      className="flex-shrink-0 w-[calc(33.333%-1rem)] border-border hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                      className="flex-shrink-0 w-[calc(33.333%-1rem)] border-border hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+                      onClick={() => handleCategoryClick(category.path)}
                     >
                       <CardContent className="p-0">
                         <div className="aspect-square overflow-hidden rounded-t-lg">
@@ -126,7 +133,8 @@ const Categories = () => {
                   {categories.map((category) => (
                     <Card
                       key={category.id}
-                      className="flex-shrink-0 w-full border-border"
+                      className="flex-shrink-0 w-full border-border cursor-pointer"
+                      onClick={() => handleCategoryClick(category.path)}
                     >
                       <CardContent className="p-0">
                         <div className="aspect-square overflow-hidden rounded-t-lg">

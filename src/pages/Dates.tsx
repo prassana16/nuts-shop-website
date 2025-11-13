@@ -79,7 +79,7 @@ const Dates = () => {
     const grams = selectedGrams[productId] || 100;
     const price = getPrice(product, grams);
     const msg = `Hello, I'm interested in ${product.name} - ${grams}g (Total: ₹${price}). Please assist with ordering.`;
-    const url = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+    const url = `https://wa.me/918888095594?text=${encodeURIComponent(msg)}`;
     window.open(url, "_blank");
   };
 
