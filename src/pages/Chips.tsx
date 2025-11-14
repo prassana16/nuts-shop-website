@@ -5,6 +5,7 @@ import { Heart, Star, Truck, Shield, Award, ChevronRight, Phone } from "lucide-r
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MixedImg from "@/assets/mixed.png";
+import { Utensils, Leaf, ShieldCheck, Sparkles } from "lucide-react";
 
 // chips product list: basePrice is price per 100g
 const chipsProducts = [
@@ -38,6 +39,28 @@ const Chips = () => {
       return newFavorites;
     });
   };
+const features = [
+  {
+    title: "Freshly Made",
+    description: "Crafted in small batches to ensure ultimate crunch and freshness.",
+    icon: Utensils,  // use any lucide icon you prefer
+  },
+  {
+    title: "Premium Ingredients",
+    description: "Made using high-quality potatoes and natural flavors only.",
+    icon: Leaf,
+  },
+  {
+    title: "Zero Added Preservatives",
+    description: "Pure, clean snacking without artificial additives.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Multiple Flavours",
+    description: "Choose from spicy, tangy, classic salted, and more.",
+    icon: Sparkles,
+  },
+];
 
   const setGramsFor = (productId: number, grams: number) => {
     setSelectedGrams((prev) => ({ ...prev, [productId]: grams }));
@@ -60,6 +83,79 @@ const Chips = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-yellow-50/30 via-amber-50/20 to-white">
       <Navbar />
+      <section className="relative h-[500px] md:h-[600px] overflow-hidden">
+  <div className="absolute inset-0 bg-gradient-to-br from-red-700 via-orange-600 to-yellow-600">
+    <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjA1IiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-20"></div>
+  </div>
+
+  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent"></div>
+
+  <div className="relative h-full flex items-center justify-center px-4">
+    <div className="text-center text-white max-w-4xl animate-in fade-in slide-in-from-bottom-4 duration-1000">
+      {/* Small Tag */}
+      <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md rounded-full px-4 py-2 mb-6 border border-white/20">
+        <span className="text-xl">🍟</span>
+        <span className="text-sm font-medium">Crispy • Fresh • Flavorful</span>
+      </div>
+
+      {/* Title */}
+      <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-200 via-orange-200 to-red-200 bg-clip-text text-transparent">
+        Taste the Crunch!
+      </h1>
+
+      {/* Subtitle */}
+      <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+        Experience our delicious range of premium-quality chips made from the finest ingredients.
+      </p>
+
+      {/* CTA Button */}
+      <Button 
+        size="lg" 
+        className="bg-white text-red-800 hover:bg-red-50 shadow-2xl hover:shadow-red-500/20 transition-all duration-300 rounded-full px-8 text-lg font-semibold group"
+      >
+        Order Now
+        <ChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+      </Button>
+    </div>
+  </div>
+
+  {/* Floating Chips Emojis */}
+  <div className="absolute top-20 left-10 text-6xl opacity-20 animate-pulse">🍟</div>
+  <div className="absolute bottom-20 right-20 text-5xl opacity-20 animate-pulse delay-300">🍿</div>
+  <div className="absolute top-1/2 right-10 text-4xl opacity-20 animate-pulse delay-700">🥔</div>
+</section>
+
+{/* Chips Features Section */}
+<section className="py-12 px-4 -mt-16 relative z-10">
+  <div className="max-w-7xl mx-auto">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {features.map((feature, index) => {
+        const Icon = feature.icon;
+        return (
+          <div
+            key={index}
+            className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-slate-200 dark:border-slate-700"
+          >
+            {/* Icon Wrapper Updated for Chips Vibe */}
+            <div className="bg-gradient-to-br from-red-500 via-orange-500 to-yellow-500 rounded-xl p-3 w-fit mb-4">
+              <Icon className="h-6 w-6 text-white" />
+            </div>
+
+            <h3 className="font-semibold text-slate-900 dark:text-white mb-1 text-sm md:text-base">
+              {feature.title}
+            </h3>
+
+            <p className="text-xs md:text-sm text-slate-600 dark:text-slate-400">
+              {feature.description}
+            </p>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+
 
   <section className="py-12 px-4 mt-16 lg:mt-20">
         <div className="max-w-7xl mx-auto text-center mb-8">
