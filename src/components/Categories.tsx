@@ -9,6 +9,7 @@ import nutsImg from "@/assets/Cashew.png";
 import perfumeImg from "@/assets/Perfume.png";
 import datesImg from "@/assets/Dates.png";
 import toysImg from "@/assets/Pista.png";
+import chipsImg from "@/assets/Chips.png";
 
 const categories = [
   { id: 1, name: "Chocolates", image: chocolateImg, description: "Premium chocolates from around the world", path: "/chocolate" },
@@ -17,6 +18,7 @@ const categories = [
   { id: 4, name: "Perfumes", image: perfumeImg, description: "Luxury fragrances for everyone", path: "/perfumes" },
   { id: 5, name: "Dates", image: datesImg, description: "Fresh and premium quality dates", path: "/dates" },
   { id: 6, name: "Toys", image: toysImg, description: "Fun toys for children of all ages", path: "/toys" },
+  { id: 7, name: "Chips", image: chipsImg, description: "Crispy and tasty chips", path: "/chips" },
 ];
 
 const Categories = () => {

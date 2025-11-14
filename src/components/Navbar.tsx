@@ -200,7 +200,7 @@ const Navbar: React.FC = () => {
               variant="ghost"
               size="icon"
               onClick={() => setIsOpen(!isOpen)}
-              className="hover:bg-amber-100 dark:hover:bg-amber-900/20 rounded-full"
+              className="rounded-full"
               aria-label="Toggle menu"
             >
               {isOpen ? (
@@ -225,7 +225,7 @@ const Navbar: React.FC = () => {
                       setIsOpen(false);
                       setIsProductsOpen(false);
                     }}
-                    className="text-left px-4 py-3 text-sm font-medium text-white dark:text-slate-200 hover:bg-amber-50 dark:hover:bg-amber-900/20 hover:text-amber-600 dark:hover:text-amber-400 rounded-lg transition-all duration-200"
+                    className="text-left px-4 py-3 text-sm font-medium text-white dark:text-slate-200 rounded-lg transition-all duration-200"
                   >
                     {link.label}
                   </Link>
@@ -235,7 +235,7 @@ const Navbar: React.FC = () => {
                     onClick={() => {
                       link.action && link.action();
                     }}
-                    className="text-left w-full px-4 py-3 text-sm font-medium text-white dark:text-slate-200 hover:bg-amber-50 dark:hover:bg-amber-900/20 hover:text-amber-600 dark:hover:text-amber-400 rounded-lg transition-all duration-200"
+                    className="text-left w-full px-4 py-3 text-sm font-medium text-white dark:text-slate-200 rounded-lg transition-all duration-200"
                   >
                     {link.label}
                   </button>
@@ -246,7 +246,7 @@ const Navbar: React.FC = () => {
               <div>
                 <button
                   onClick={() => setIsProductsOpen(!isProductsOpen)}
-                  className="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-white dark:text-slate-200 hover:bg-amber-50 dark:hover:bg-amber-900/20 hover:text-amber-600 dark:hover:text-amber-400 rounded-lg transition-all duration-200"
+                  className="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-white dark:text-slate-200 rounded-lg transition-all duration-200"
                 >
                   Products
                   <ChevronDown
@@ -266,7 +266,7 @@ const Navbar: React.FC = () => {
                         <button
                           key={product.id}
                           onClick={() => handleProductNav(product.path)}
-                          className="flex flex-col items-center justify-center p-3 rounded-lg hover:bg-white dark:hover:bg-slate-700 transition-all duration-200 hover:shadow-sm"
+                          className="flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200"
                         >
                           <span className="text-2xl mb-1">{product.icon}</span>
                           <span className="text-xs font-medium text-white dark:text-slate-300 text-center">
@@ -283,7 +283,7 @@ const Navbar: React.FC = () => {
                 onClick={() => {
                   scrollToSection("contact");
                 }}
-                className="text-left px-4 py-3 text-sm font-medium text-white dark:text-slate-200 hover:bg-amber-50 dark:hover:bg-amber-900/20 hover:text-amber-600 dark:hover:text-amber-400 rounded-lg transition-all duration-200"
+                className="text-left px-4 py-3 text-sm font-medium text-white dark:text-slate-200 rounded-lg transition-all duration-200"
               >
                 Contact
               </button>
