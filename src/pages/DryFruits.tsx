@@ -1,33 +1,45 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Heart, Phone, Crown, ChevronRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import MixedImg from "@/assets/mixed.png";
 
-const dryFruits = [
-  { id: 1, name: "DRY FIG MEDIUM", basePrice: 260, description: "Dry Fig Medium", image: MixedImg },
-  { id: 2, name: "DRY FIG FRUIT", basePrice: 270, description: "Dry Fig Fruit", image: MixedImg },
-  { id: 3, name: "GOLDEN RAISINS", basePrice: 130, description: "Golden Raisins", image: MixedImg },
-  { id: 4, name: "MONAKKA RAISINS", basePrice: 120, description: "Monakka Raisins", image: MixedImg },
-  { id: 5, name: "GOLDEN RAISINS JUMBO", basePrice: 145, description: "Golden Raisins Jumbo", image: MixedImg },
-  { id: 6, name: "RAISINS BLACK", basePrice: 70, description: "Raisins Black", image: MixedImg },
-  { id: 7, name: "DRY FRUITS MIX DICE", basePrice: 130, description: "Dry Fruits Mix Dice", image: MixedImg },
-  { id: 8, name: "DRY FRUITS PINEAPPLE", basePrice: 130, description: "Dry Fruits Pineapple", image: MixedImg },
-  { id: 9, name: "DRY FRUITS MANGO", basePrice: 130, description: "Dry Fruits Mango", image: MixedImg },
-  { id: 10, name: "DRY FRUITS MIX SLICE", basePrice: 130, description: "Dry Fruits Mix Slice", image: MixedImg },
-  { id: 11, name: "DRY FRUITS PAPAYA", basePrice: 130, description: "Dry Fruits Papaya", image: MixedImg },
-  { id: 12, name: "DRY FRUITS CANTALOUPE", basePrice: 130, description: "Dry Fruits Cantaloupe", image: MixedImg },
-  { id: 13, name: "DRY FRUITS POMELO", basePrice: 130, description: "Dry Fruits Pomelo", image: MixedImg },
-  { id: 14, name: "DRY FRUITS KIWI", basePrice: 130, description: "Dry Fruits Kiwi", image: MixedImg },
-  { id: 15, name: "DRY FRUITS GINGER", basePrice: 130, description: "Dry Fruits Ginger", image: MixedImg },
-  { id: 16, name: "BLUE BERRY", basePrice: 216, description: "Blue Berry", image: MixedImg },
-  { id: 17, name: "CANEBERRY", basePrice: 74, description: "Caneberry", image: MixedImg },
-  { id: 18, name: "DRY PLUM", basePrice: 105, description: "Dry Plum", image: MixedImg },
-  { id: 19, name: "PREMIUM DRY CHERRY", basePrice: 130, description: "Premium Dry Cherry", image: MixedImg },
-  { id: 20, name: "SUGAR AMLA", basePrice: 40, description: "Sugar Amla", image: MixedImg },
-  { id: 21, name: "DRY CHERRIES PSEL", basePrice: 125, description: "Dry Cherries Psel", image: MixedImg },
+type Product = {
+  id: number;
+  name: string;
+  basePrice: number;
+  description: string;
+  category: string;
+  emoji?: string;
+  image: string;
+};
+
+const dryFruits: Product[] = [
+  // Dates (use public images: /images/dryfruits/{id}.jpg)
+ 
+  // Dry Fruits
+  { id: 14, name: "DRY FIG MEDIUM", basePrice: 260, description: "Dry Fig Medium", category: "Dry Fruits", image: "src/assets/images/dry_fruits/dry_fig_fruit.jpg" },
+  { id: 15, name: "DRY FIG FRUIT", basePrice: 270, description: "Dry Fig Fruit", category: "Dry Fruits", image: "src/assets/images/dry_fruits/dry_fig_medium.jpg" },
+  { id: 16, name: "GOLDEN RAISINS", basePrice: 130, description: "Golden Raisins", category: "Dry Fruits", image: "src/assets/images/dry_fruits/Golden_raisins.jpg" },
+  { id: 17, name: "MONAKKA RAISINS", basePrice: 120, description: "Monakka Raisins", category: "Dry Fruits", image: "src/assets/images/dry_fruits/manakka_rasins.jpg" },
+  { id: 18, name: "GOLDEN RAISINS JUMBO", basePrice: 145, description: "Golden Raisins Jumbo", category: "Dry Fruits", image:"src/assets/images/dry_fruits/Golden_raisins.jpg" },
+  { id: 19, name: "RAISINS BLACK", basePrice: 70, description: "Raisins Black", category: "Dry Fruits", image: "src/assets/images/dry_fruits/Raisins_black.jpg" },
+  { id: 20, name: "DRY FRUITS MIX DICE", basePrice: 130, description: "Dry Fruits Mix Dice", category: "Dry Fruits", image:"src/assets/images/dry_fruits/dry_fruit_mixdice.jpg" },
+  { id: 21, name: "DRY FRUITS PINEAPPLE", basePrice: 130, description: "Dry Fruits Pineapple", category: "Dry Fruits", image: "src/assets/images/dry_fruits/dry_frutit_pineapplejpg.jpg"},
+  { id: 22, name: "DRY FRUITS MANGO", basePrice: 130, description: "Dry Fruits Mango", category: "Dry Fruits", image: "src/assets/images/dry_fruits/dry_fruit_mango.jpg"},
+  { id: 23, name: "DRY FRUITS MIX SLICE", basePrice: 130, description: "Dry Fruits Mix Slice", category: "Dry Fruits", image: "src/assets/images/dry_fruits/mix_slice.jpg" },
+  { id: 24, name: "DRY FRUITS PAPAYA", basePrice: 130, description: "Dry Fruits Papaya", category: "Dry Fruits", image: "src/assets/images/dry_fruits/dry_fruit_papaya.jpg" },
+  { id: 25, name: "DRY FRUITS CANTALOUPE", basePrice: 130, description: "Dry Fruits Cantaloupe", category: "Dry Fruits", image: "src/assets/images/dry_fruits/cantaloupe.jpg "},
+  { id: 26, name: "DRY FRUITS POMELO", basePrice: 130, description: "Dry Fruits Pomelo", category: "Dry Fruits", image: "src/assets/images/dry_fruits/pomelo.jpg" },
+  { id: 27, name: "DRY FRUITS KIWI", basePrice: 130, description: "Dry Fruits Kiwi", category: "Dry Fruits", image: "src/assets/images/dry_fruits/kiwi.jpg "},
+  { id: 28, name: "DRY FRUITS GINGER", basePrice: 130, description: "Dry Fruits Ginger", category: "Dry Fruits", image: "src/assets/images/dry_fruits/ginger.jpg" },
+  { id: 29, name: "BLUE BERRY", basePrice: 216, description: "Blue Berry", category: "Dry Fruits", image: "src/assets/images/dry_fruits/blue berry.jpg "},
+  { id: 30, name: "CANEBERRY", basePrice: 74, description: "Caneberry", category: "Dry Fruits", image: "src/assets/images/dry_fruits/caneberry.jpg "},
+  { id: 31, name: "DRY PLUM", basePrice: 105, description: "Dry Plum", category: "Dry Fruits", image: "src/assets/images/dry_fruits/plum.jpg "},
+  { id: 32, name: "PREMIUM DRY CHERRY", basePrice: 130, description: "Premium Dry Cherry", category: "Dry Fruits", image: "src/assets/images/dry_fruits/dry_Cherry.jpg"},
+  { id: 33, name: "SUGAR AMLA", basePrice: 40, description: "Sugar Amla", category: "Dry Fruits", image: "src/assets/images/dry_fruits/sugar_amla.jpg"},
+  { id: 34, name: "DRY CHERRIES PSEL", basePrice: 125, description: "Dry Cherries Psel", category: "Dry Fruits", image: "src/assets/images/dry_fruits/cherries_psel.jpg" },
 ];
 
 const DryFruits = () => {
@@ -75,7 +87,6 @@ const DryFruits = () => {
   <div className="relative h-full flex items-center justify-center px-4">
     <div className="text-center text-white max-w-4xl animate-in fade-in slide-in-from-bottom-4 duration-1000">
       <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md rounded-full px-4 py-2 mb-6 border border-white/20">
-        
         <span className="text-sm font-medium">Healthy & Premium Dry Fruits</span>
       </div>
       <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-200 via-orange-200 to-amber-200 bg-clip-text text-transparent">
@@ -94,10 +105,16 @@ const DryFruits = () => {
     </div>
   </div>
 
-  {/* Floating Elements */}
-  <div className="absolute top-20 left-10 text-6xl opacity-20 animate-pulse">🥜</div>
-  <div className="absolute bottom-20 right-20 text-5xl opacity-20 animate-pulse delay-300">🌰</div>
-  <div className="absolute top-1/2 right-10 text-4xl opacity-20 animate-pulse delay-700">🍇</div>
+  {/* Floating Images - replace the emoji with images placed in public/images/dryfruits */}
+  <div className="absolute top-20 left-10 opacity-20 animate-pulse">
+    <img src="/images/dryfruits/peanut.png" alt="peanut" className="w-14 h-14 object-contain" onError={(e)=>{ (e.currentTarget as HTMLImageElement).style.display = 'none'; }} />
+  </div>
+  <div className="absolute bottom-20 right-20 opacity-20 animate-pulse delay-300">
+    <img src="/images/dryfruits/walnut.png" alt="walnut" className="w-16 h-16 object-contain" onError={(e)=>{ (e.currentTarget as HTMLImageElement).style.display = 'none'; }} />
+  </div>
+  <div className="absolute top-1/2 right-10 opacity-20 animate-pulse delay-700">
+    <img src="/images/dryfruits/grapes.png" alt="grapes" className="w-12 h-12 object-contain" onError={(e)=>{ (e.currentTarget as HTMLImageElement).style.display = 'none'; }} />
+  </div>
 </section>
 
 
@@ -126,11 +143,14 @@ const DryFruits = () => {
               </button>
 
               <div className="aspect-square overflow-hidden bg-gradient-to-br from-yellow-50 to-white relative">
-                {product.image ? (
-                  <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 relative z-10" />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-6xl">🥭</div>
-                )}
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 relative z-10"
+                  onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                />
+                {/* fallback (visible only if image cannot be loaded) */}
+                <div className="w-full h-full flex items-center justify-center text-2xl text-slate-400">{product.name}</div>
               </div>
 
               <CardContent className="p-5">

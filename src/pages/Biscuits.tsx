@@ -1,96 +1,344 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Heart, Star, Cookie, Truck, Shield, Award, Plus, Minus, ChevronRight, Wheat, Sparkles, UtensilsCrossed } from "lucide-react";
+import {
+  ShoppingCart,
+  Heart,
+  Star,
+  Cookie,
+  Truck,
+  Shield,
+  Award,
+  Plus,
+  Minus,
+  ChevronRight,
+  Wheat,
+  Sparkles,
+  UtensilsCrossed,
+} from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+// Import all product images
+import nutellaImg from "@/assets/images/raphotos/nutella.jpg";
+import lemonImg from "@/assets/images/raphotos/lemon_creams.jpg";
+
+
+  /* ... your products array unchanged ... */
 const biscuitsProducts = [
   { 
     id: 1, 
-    name: "Chocolate Cookies", 
-    price: 149, 
+    name: "NUTELLA BISCUIT POUCH", 
+    price: 780, 
     rating: 4.9,
     reviews: 245,
-    description: "Rich chocolate chip cookies",
+    description: "Hazelnut cream filled biscuits",
     badge: "Best Seller",
-    weight: "250g",
-    emoji: "🍪"
+    weight: "276g",
+    image: "src/assets/images/raphotos/nutella_biscuits.jpg"
   },
   { 
     id: 2, 
-    name: "Butter Biscuits", 
-    price: 129, 
+    name: "MUNCHEE LEMON FLAVOUR", 
+    price: 60, 
     rating: 4.8,
     reviews: 198,
-    description: "Classic buttery flavor",
-    weight: "300g",
-    emoji: "🍪"
+    description: "Refreshing lemon biscuits",
+    weight: "200g",
+    image: lemonImg
   },
   { 
     id: 3, 
-    name: "Oatmeal Cookies", 
-    price: 179, 
+    name: "MUNCHEE SUPER CREAM CRACKER", 
+    price: 60, 
     rating: 4.7,
     reviews: 156,
-    description: "Healthy oatmeal goodness",
-    badge: "Premium",
-    weight: "250g",
-    emoji: "🍪"
+    description: "Crispy cream crackers",
+    weight: "200g",
+    image: "src/assets/images/raphotos/cream_cracker.jpg"
   },
   { 
     id: 4, 
-    name: "Cream Sandwich", 
-    price: 159, 
+    name: "MUNCHEE MILK BISCUIT", 
+    price: 20, 
     rating: 4.9,
     reviews: 203,
-    description: "Vanilla cream filling",
-    weight: "300g",
-    emoji: "🥪"
+    description: "Classic milk biscuits",
+    weight: "75g",
+    image: "src/assets/images/raphotos/kunafa_gold1.jpg"
   },
   { 
     id: 5, 
-    name: "Assorted Pack", 
-    price: 249, 
+    name: "MUNCHEE GINGER BISCUIT", 
+    price: 20, 
     rating: 4.8,
     reviews: 287,
-    description: "Mix of 4 popular varieties",
-    badge: "Popular",
-    weight: "500g",
-    emoji: "🍪"
+    description: "Spicy ginger flavor",
+    weight: "75g",
+    image: nutellaImg
   },
   { 
     id: 6, 
-    name: "Digestive", 
-    price: 139, 
+    name: "DIGESTIVE ORIGINAL", 
+    price: 45, 
     rating: 4.6,
     reviews: 134,
-    description: "Whole wheat digestive",
-    weight: "250g",
-    emoji: "🍪"
+    description: "Wholesome digestive biscuits",
+    weight: "30g",
+    image: "src/assets/images/raphotos/digestive_original.jpg"
   },
   { 
     id: 7, 
-    name: "Fruit Cookies", 
-    price: 189, 
+    name: "DIGESTIVE CARAMEL", 
+    price: 49, 
     rating: 4.7,
     reviews: 98,
-    description: "Mixed fruit filling",
-    badge: "New",
-    weight: "250g",
-    emoji: "🍪"
+    description: "Caramel coated digestive",
+    weight: "30g",
+    image: "src/assets/images/raphotos/digestive2.jpg"
   },
   { 
     id: 8, 
-    name: "Sugar Free", 
-    price: 199, 
+    name: "DIGESTIVE ORIGINAL 400G", 
+    price: 349, 
     rating: 4.8,
     reviews: 167,
-    description: "Zero sugar cookies",
+    description: "Large pack digestive biscuits",
+    badge: "Premium",
+    weight: "400g",
+    image: "src/assets/images/raphotos/digestive_original.jpg"
+  },
+  { 
+    id: 9, 
+    name: "SUGAR FREE CHOCOLATE BISCUIT", 
+    price: 245, 
+    rating: 4.7,
+    reviews: 145,
+    description: "Zero sugar chocolate cookies",
+    badge: "Popular",
+    weight: "190g",
+    image: "src/assets/images/raphotos/sugarfree_tiiffany.jpg"
+  },
+  { 
+    id: 10, 
+    name: "SUGAR FREE LEMON BISCUIT", 
+    price: 245, 
+    rating: 4.6,
+    reviews: 123,
+    description: "Zero sugar lemon biscuits",
+    weight: "190g",
+    image: lemonImg
+  },
+  { 
+    id: 11, 
+    name: "SUGAR FREE ORANGE BISCUIT", 
+    price: 245, 
+    rating: 4.6,
+    reviews: 118,
+    description: "Zero sugar orange flavor",
+    weight: "190g",
+    image: nutellaImg
+  },
+  { 
+    id: 12, 
+    name: "BISCOFF BISCUIT", 
+    price: 699, 
+    rating: 4.9,
+    reviews: 298,
+    description: "Caramelized Belgian biscuits",
+    badge: "Premium",
+    weight: "250g",
+    image: "src/assets/images/raphotos/lotus_biscoff.jpg"
+  },
+  { 
+    id: 13, 
+    name: "COFFEE JOY BISCUIT", 
+    price: 59, 
+    rating: 4.5,
+    reviews: 87,
+    description: "Coffee flavored biscuits",
+    weight: "37g",
+    image: nutellaImg
+  },
+  { 
+    id: 14, 
+    name: "MEIJI HELLO PANDA CHOCOLATE", 
+    price: 99, 
+    rating: 4.8,
+    reviews: 234,
+    description: "Chocolate cream filled biscuits",
+    weight: "22g",
+    image: "src/assets/images/raphotos/pand_hello_red.jpg"
+  },
+  { 
+    id: 15, 
+    name: "MEIJI HELLO PANDA STRAWBERRY", 
+    price: 99, 
+    rating: 4.7,
+    reviews: 198,
+    description: "Strawberry cream filled",
+    weight: "42g",
+    image: "src/assets/images/raphotos/panda_hellow_strawberry.jpg"
+  },
+  { 
+    id: 16, 
+    name: "MCOATY BREAKFAST OAT CHOCOLATE", 
+    price: 250, 
+    rating: 4.8,
+    reviews: 156,
+    description: "Oat cookies with chocolate chips",
+    badge: "New",
+    weight: "96g",
+    image: lemonImg
+  },
+  { 
+    id: 17, 
+    name: "MCOATY BREAKFAST OAT RAISINS", 
+    price: 250, 
+    rating: 4.7,
+    reviews: 142,
+    description: "Oat cookies with raisins",
+    weight: "96g",
+    image: nutellaImg
+  },
+  { 
+    id: 18, 
+    name: "GPR CHOCOLATE CHIPS COOKIES", 
+    price: 250, 
+    rating: 4.7,
+    reviews: 167,
+    description: "Authentic British recipe cookies",
+    weight: "96g",
+    image: lemonImg
+  },
+  { 
+    id: 19, 
+    name: "HARRODSON BLUEBERRY ALMOND", 
+    price: 700, 
+    rating: 4.9,
+    reviews: 189,
+    description: "Traditional blueberry butter cookies",
+    badge: "Premium",
+    weight: "338g",
+    image: nutellaImg
+  },
+  { 
+    id: 20, 
+    name: "SAPPHIRE CHOCOCHIP COOKIES", 
+    price: 350, 
+    rating: 4.8,
+    reviews: 201,
+    description: "Premium chocolate chip cookies",
+    weight: "350g",
+    image: lemonImg
+  },
+  { 
+    id: 21, 
+    name: "SAPPHIRE BUTTER COOKIES GOLD", 
+    price: 350, 
+    rating: 4.9,
+    reviews: 223,
+    description: "Gold collection butter cookies",
+    badge: "Premium",
+    weight: "350g",
+    image: nutellaImg
+  },
+  { 
+    id: 22, 
+    name: "SAPPHIRE BUTTER COOKIES SILVER", 
+    price: 350, 
+    rating: 4.8,
+    reviews: 198,
+    description: "Silver collection butter cookies",
+    weight: "350g",
+    image: lemonImg
+  },
+  { 
+    id: 23, 
+    name: "DANISA BUTTER COOKIES 200G", 
+    price: 699, 
+    rating: 4.9,
+    reviews: 312,
+    description: "Traditional Danish butter cookies",
+    badge: "Best Seller",
     weight: "200g",
-    emoji: "🍪"
+    image: nutellaImg
+  },
+  { 
+    id: 24, 
+    name: "DANISA BUTTER COOKIES 375G", 
+    price: 999, 
+    rating: 4.9,
+    reviews: 276,
+    description: "Traditional Danish butter cookies",
+    weight: "375g",
+    image: lemonImg
+  },
+  { 
+    id: 25, 
+    name: "DANISA BUTTER COOKIES 750G", 
+    price: 1999, 
+    rating: 4.9,
+    reviews: 189,
+    description: "Traditional Danish butter cookies",
+    badge: "Premium",
+    weight: "750g",
+    image: nutellaImg
+  },
+  { 
+    id: 26, 
+    name: "AMERICANA PREMIUM BUTTER COOKIES", 
+    price: 599, 
+    rating: 4.8,
+    reviews: 167,
+    description: "Quality premium butter cookies",
+    weight: "454g",
+    image: lemonImg
+  },
+  { 
+    id: 27, 
+    name: "HAPPY DAY ASSORTED BISCUITS", 
+    price: 650, 
+    rating: 4.7,
+    reviews: 234,
+    description: "Variety pack assorted biscuits",
+    badge: "Popular",
+    weight: "600g",
+    image: nutellaImg
+  },
+  { 
+    id: 28, 
+    name: "OMAN DATE BAR", 
+    price: 35, 
+    rating: 4.6,
+    reviews: 145,
+    description: "Date filled biscuit bar",
+    weight: "21g",
+    image: lemonImg
+  },
+  { 
+    id: 29, 
+    name: "MAAMOUL OMAN DATE BISCUIT", 
+    price: 25, 
+    rating: 4.7,
+    reviews: 178,
+    description: "Traditional date filled cookies",
+    weight: "20g",
+    image: nutellaImg
+  },
+  { 
+    id: 30, 
+    name: "MAAMOUL SAUDIA DATE BISCUIT", 
+    price: 25, 
+    rating: 4.7,
+    reviews: 165,
+    description: "Arabian date filled cookies",
+    weight: "19g",
+    image: lemonImg
   },
 ];
+  // (rest of the 2..30 items - keep as you had them)
+
 
 const features = [
   { icon: Cookie, title: "Fresh Baked", description: "Daily fresh batches" },
@@ -138,6 +386,7 @@ const Biscuits = () => {
 
   const addToCart = (productId) => {
     setCartItems((prev) => new Set([...prev, productId]));
+    // temporary visual feedback — remove after 2s
     setTimeout(() => {
       setCartItems((prev) => {
         const newCart = new Set(prev);
@@ -152,10 +401,10 @@ const Biscuits = () => {
       <Navbar />
       {/* Hero Section */}
       <section className="relative h-[500px] md:h-[600px] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-800 via-orange-700 to-red-800">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjA1IiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-30"></div>
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-800 via-orange-700 to-red-800" />
+        {/* simple overlay for subtle texture (valid JSX) */}
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PC9zdmc+')] opacity-10 bg-repeat" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
         
         <div className="relative h-full flex items-center justify-center px-4">
           <div className="text-center text-white max-w-4xl animate-in fade-in slide-in-from-bottom-4 duration-1000">
@@ -178,12 +427,7 @@ const Biscuits = () => {
             </Button>
           </div>
         </div>
-
-        {/* Floating Elements */}
-        <div className="absolute top-20 left-10 text-6xl opacity-20 animate-pulse">🍪</div>
-        <div className="absolute bottom-20 right-20 text-5xl opacity-20 animate-pulse delay-300">🥮</div>
-        <div className="absolute top-1/2 right-10 text-4xl opacity-20 animate-pulse delay-700">🍪</div>
-      </section>
+        </section>
 
       {/* Features Section */}
       <section className="py-12 px-4 -mt-16 relative z-10">
@@ -295,9 +539,11 @@ const Biscuits = () => {
 
               <div className="aspect-square overflow-hidden bg-gradient-to-br from-amber-50 to-orange-50 dark:from-slate-700 dark:to-slate-600 relative">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.1)_0%,_transparent_70%)]"></div>
-                <div className="w-full h-full flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500 relative z-10">
-                  {product.emoji}
-                </div>
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
               </div>
 
               <CardContent className="p-5">
@@ -389,9 +635,8 @@ const Biscuits = () => {
       <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 rounded-3xl p-12 text-center text-white shadow-2xl relative overflow-hidden">
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30"></div>
+            <div className="absolute inset-0 opacity-30 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PC9zdmc+')]"></div>
             <div className="relative z-10">
-              <Cookie className="h-16 w-16 mx-auto mb-4 text-amber-100" />
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
                 Subscribe & Save
               </h2>
