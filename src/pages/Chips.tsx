@@ -27,7 +27,8 @@ const chipsProducts: ChipProduct[] = [
   { id: 8, name: "MEXICAN", basePrice: 39, description: "Mexican spicy mix", image: "src/assets/images/chips/mexican.jpg" },
   { id: 9, name: "MASALA", basePrice: 36, description: "Indian masala chips", image:"src/assets/images/chips/masalachips.jpg" },
   { id: 10, name: "PLAIN SALT", basePrice: 30, description: "Plain salted chips", image: "src/assets/images/chips/plainsalt.jpg" },
-];
+   { id: 1, name: "OMAN CHIPS", basePrice: 35, description: "OMAN  chips", image: "src/assets/images/omanchip.jpg" },
+    ];
 
 const features = [
   { icon: Truck, title: "Fresh Stock", description: "Regularly replenished for crunch" },

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Star, ShoppingCart, Search, Gift, ChevronRight, Heart, Minus, Plus } from 'lucide-react';
+import { Star, ShoppingCart, Search, Gift, ChevronRight, Heart, Minus, Plus, Phone } from 'lucide-react';
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
@@ -241,7 +241,6 @@ const ToysShowcase = () => {
   ];
 
   const [searchTerm, setSearchTerm] = useState('');
-  const [cart, setCart] = useState([]);
   const [quantities, setQuantities] = useState({});
   const [favorites, setFavorites] = useState(new Set());
   const [cartItems, setCartItems] = useState(new Set());
@@ -276,15 +275,14 @@ const ToysShowcase = () => {
     });
   };
 
-  const addToCart = (productId) => {
-    setCartItems((prev) => new Set([...prev, productId]));
-    setTimeout(() => {
-      setCartItems((prev) => {
-        const newCart = new Set(prev);
-        newCart.delete(productId);
-        return newCart;
-      });
-    }, 2000);
+  const contactWhatsApp = (product: any, qty = 1) => {
+    const name = product?.name || "product";
+    const price = product?.price ? product.price * qty : undefined;
+    const msg = price
+      ? `Hello, I'm interested in ${name} - Quantity: ${qty} (Total: ₹${price}). Please assist with ordering.`
+      : `Hello, I'm interested in ${name}. Please assist with ordering.`;
+    const url = `https://wa.me/918888095594?text=${encodeURIComponent(msg)}`;
+    window.open(url, "_blank");
   };
 
   return (
@@ -501,22 +499,11 @@ const ToysShowcase = () => {
                 </div>
 
                 <Button 
-                  onClick={() => addToCart(product.id)}
-                  disabled={cartItems.has(product.id)}
-                  className={`w-full rounded-full font-semibold transition-all duration-300 ${
-                    cartItems.has(product.id)
-                      ? "bg-purple-500 hover:bg-purple-600"
-                      : "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 hover:shadow-lg hover:shadow-purple-500/30"
-                  }`}
+                  onClick={() => contactWhatsApp(product, 1)} 
+                  className="w-full rounded-full font-semibold bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600"
                 >
-                  {cartItems.has(product.id) ? (
-                    <>Added to Cart ✓</>
-                  ) : (
-                    <>
-                      <ShoppingCart className="mr-2 h-4 w-4" />
-                      Add to Cart
-                    </>
-                  )}
+                  <Phone className="mr-2 h-4 w-4" />
+                  Contact WhatsApp
                 </Button>
               </CardFooter>
             </Card>
