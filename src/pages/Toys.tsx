@@ -1,114 +1,253 @@
-import { useState } from "react";
+import React, { useState } from 'react';
+import { Star, ShoppingCart, Search, Gift, ChevronRight, Heart, Minus, Plus, Phone } from 'lucide-react';
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Heart, Star, Package, Truck, Shield, Award, Plus, Minus, ChevronRight, Gift, Sparkles, Smile } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const toysProducts = [
-  { 
-    id: 1, 
-    name: "Educational Blocks", 
-    price: 899, 
-    rating: 4.9,
-    reviews: 245,
-    description: "Learning blocks for early development",
-    badge: "Best Seller",
-    age: "3-8 years",
-    emoji: "🧸"
-  },
-  { 
-    id: 2, 
-    name: "Remote Car", 
-    price: 1299, 
-    rating: 4.8,
-    reviews: 198,
-    description: "High-speed remote control car",
-    age: "6+ years",
-    emoji: "🚗"
-  },
-  { 
-    id: 3, 
-    name: "Art Set", 
-    price: 749, 
-    rating: 4.7,
-    reviews: 156,
-    description: "Complete art and craft kit",
-    badge: "Premium",
-    age: "4+ years",
-    emoji: "🎨"
-  },
-  { 
-    id: 4, 
-    name: "Plush Elephant", 
-    price: 599, 
-    rating: 4.9,
-    reviews: 203,
-    description: "Soft and cuddly elephant toy",
-    age: "0+ years",
-    emoji: "🐘"
-  },
-  { 
-    id: 5, 
-    name: "Science Kit", 
-    price: 999, 
-    rating: 4.8,
-    reviews: 287,
-    description: "Fun experiments for kids",
-    badge: "Popular",
-    age: "8+ years",
-    emoji: "🔬"
-  },
-  { 
-    id: 6, 
-    name: "Board Game", 
-    price: 799, 
-    rating: 4.6,
-    reviews: 134,
-    description: "Family fun board game",
-    age: "6+ years",
-    emoji: "🎲"
-  },
-  { 
-    id: 7, 
-    name: "Building Set", 
-    price: 1499, 
-    rating: 4.7,
-    reviews: 98,
-    description: "Creative construction blocks",
-    badge: "New",
-    age: "5+ years",
-    emoji: "🏗️"
-  },
-  { 
-    id: 8, 
-    name: "Musical Piano", 
-    price: 899, 
-    rating: 4.8,
-    reviews: 167,
-    description: "Interactive musical toy",
-    age: "2+ years",
-    emoji: "🎹"
-  },
-];
+const ToysShowcase = () => {
+  const toysProducts = [
+    { 
+      id: 1, 
+      name: "Educational Blocks", 
+      price: 899, 
+      rating: 4.9,
+      reviews: 245,
+      description: "Learning blocks for early development",
+      badge: "Best Seller",
+      age: "3-8 years",
+      emoji: "🧸"
+    },
+    { 
+      id: 2, 
+      name: "Remote Car", 
+      price: 1299, 
+      rating: 4.8,
+      reviews: 198,
+      description: "High-speed remote control car",
+      age: "6+ years",
+      emoji: "🚗"
+    },
+    { 
+      id: 3, 
+      name: "Art Set", 
+      price: 749, 
+      rating: 4.7,
+      reviews: 156,
+      description: "Complete art and craft kit",
+      badge: "Premium",
+      age: "4+ years",
+      emoji: "🎨"
+    },
+    { 
+      id: 4, 
+      name: "Plush Elephant", 
+      price: 599, 
+      rating: 4.9,
+      reviews: 203,
+      description: "Soft and cuddly elephant toy",
+      age: "0+ years",
+      emoji: "🐘"
+    },
+    { 
+      id: 5, 
+      name: "Science Kit", 
+      price: 999, 
+      rating: 4.8,
+      reviews: 287,
+      description: "Fun experiments for kids",
+      badge: "Popular",
+      age: "8+ years",
+      emoji: "🔬"
+    },
+    { 
+      id: 6, 
+      name: "Board Game", 
+      price: 799, 
+      rating: 4.6,
+      reviews: 134,
+      description: "Family fun board game",
+      age: "6+ years",
+      emoji: "🎲"
+    },
+    { 
+      id: 7, 
+      name: "Building Set", 
+      price: 1499, 
+      rating: 4.7,
+      reviews: 98,
+      description: "Creative construction blocks",
+      badge: "New",
+      age: "5+ years",
+      emoji: "🏗️"
+    },
+    { 
+      id: 8, 
+      name: "Musical Piano", 
+      price: 899, 
+      rating: 4.8,
+      reviews: 167,
+      description: "Interactive musical toy",
+      age: "2+ years",
+      emoji: "🎹"
+    },
+    // Toys from PDF
+    { 
+      id: 9, 
+      name: "Dino Car Toys", 
+      price: 250, 
+      rating: 4.6,
+      reviews: 89,
+      description: "Fun dinosaur-themed toy cars",
+      age: "3+ years",
+      emoji: "🦕"
+    },
+    { 
+      id: 10, 
+      name: "Race Car Toy Candy", 
+      price: 215, 
+      rating: 4.5,
+      reviews: 112,
+      description: "Race car toy with candy surprise",
+      age: "4+ years",
+      emoji: "🏎️"
+    },
+    { 
+      id: 11, 
+      name: "Torpedo Water Gun Candy", 
+      price: 199, 
+      rating: 4.7,
+      reviews: 143,
+      description: "Water gun toy with candy (15g)",
+      age: "5+ years",
+      emoji: "💦"
+    },
+    { 
+      id: 12, 
+      name: "Bird Merry-Go-Round Candy Toys", 
+      price: 250, 
+      rating: 4.8,
+      reviews: 76,
+      description: "Rotating bird carousel toy with candy",
+      badge: "Fun",
+      age: "3+ years",
+      emoji: "🎠"
+    },
+    { 
+      id: 13, 
+      name: "Handheld Lightup Elephant Fan", 
+      price: 250, 
+      rating: 4.9,
+      reviews: 134,
+      description: "LED elephant fan with candy",
+      badge: "Popular",
+      age: "4+ years",
+      emoji: "🐘"
+    },
+    { 
+      id: 14, 
+      name: "Basketball Shooting Candy Toys", 
+      price: 250, 
+      rating: 4.6,
+      reviews: 98,
+      description: "Mini basketball game with candy",
+      age: "5+ years",
+      emoji: "🏀"
+    },
+    { 
+      id: 15, 
+      name: "Candy Blocks Candy Toys", 
+      price: 180, 
+      rating: 4.5,
+      reviews: 87,
+      description: "Building blocks candy toy (5g)",
+      age: "3+ years",
+      emoji: "🧱"
+    },
+    { 
+      id: 16, 
+      name: "Candy Dispenser Toys", 
+      price: 250, 
+      rating: 4.7,
+      reviews: 156,
+      description: "Fun candy dispenser toy (20g)",
+      age: "4+ years",
+      emoji: "🍬"
+    },
+    { 
+      id: 17, 
+      name: "Funbrella Umbrella Candy Toys", 
+      price: 10, 
+      rating: 4.4,
+      reviews: 203,
+      description: "Mini umbrella toy with candy",
+      age: "3+ years",
+      emoji: "☂️"
+    },
+    { 
+      id: 18, 
+      name: "Fantasy Fairy Princess Candy", 
+      price: 10, 
+      rating: 4.6,
+      reviews: 189,
+      description: "Princess-themed candy toy",
+      age: "3+ years",
+      emoji: "👸"
+    },
+    { 
+      id: 19, 
+      name: "Torpedo Egg Pop", 
+      price: 140, 
+      rating: 4.5,
+      reviews: 112,
+      description: "Egg-shaped pop candy toy",
+      age: "4+ years",
+      emoji: "🥚"
+    },
+    { 
+      id: 20, 
+      name: "Cricket Ball Candy Toys", 
+      price: 20, 
+      rating: 4.3,
+      reviews: 67,
+      description: "Cricket ball toy with candy",
+      age: "5+ years",
+      emoji: "🏏"
+    },
+    { 
+      id: 21, 
+      name: "Turbo Ventilator Mini Candy", 
+      price: 250, 
+      rating: 4.7,
+      reviews: 145,
+      description: "Mini fan toy with candy (5g)",
+      age: "4+ years",
+      emoji: "🌀"
+    },
+  ];
 
-const features = [
-  { icon: Gift, title: "Age Appropriate", description: "Carefully selected for each age group" },
-  { icon: Truck, title: "Fast Delivery", description: "Quick and secure shipping" },
-  { icon: Shield, title: "Safety Tested", description: "Meets all safety standards" },
-  { icon: Award, title: "Top Quality", description: "Premium branded toys" },
-];
+  // basic feature/benefit placeholders used in the UI (prevent "features"/"benefits" is not defined errors)
+  const features = [
+    { title: 'Safe Materials', description: 'Non-toxic, child-safe toys', icon: Gift },
+    { title: 'Free Shipping', description: 'Free delivery on orders over ₹999', icon: ShoppingCart },
+    { title: 'Educational Design', description: 'Toys that promote learning', icon: Star },
+    { title: 'Quality Tested', description: 'Durability & safety checked', icon: Star },
+  ];
 
-const benefits = [
-  { icon: Sparkles, title: "Learning Through Play", description: "Educational value in every toy" },
-  { icon: Smile, title: "Fun & Engaging", description: "Hours of entertainment" },
-  { icon: Package, title: "Durable Design", description: "Built to last long" },
-];
+  const benefits = [
+    { title: 'Encourages Learning', description: 'Stimulates creativity and problem solving', icon: Star },
+    { title: 'Built to Last', description: 'High-quality materials for long play', icon: Star },
+    { title: 'Kid-approved', description: 'Fun designs that children love', icon: Gift },
+  ];
 
-const Toys = () => {
+  const [searchTerm, setSearchTerm] = useState('');
   const [quantities, setQuantities] = useState({});
   const [favorites, setFavorites] = useState(new Set());
   const [cartItems, setCartItems] = useState(new Set());
+
+  const filteredProducts = toysProducts.filter(product =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const incrementQuantity = (productId) => {
     const current = parseInt(quantities[productId] || "1");
@@ -136,15 +275,14 @@ const Toys = () => {
     });
   };
 
-  const addToCart = (productId) => {
-    setCartItems((prev) => new Set([...prev, productId]));
-    setTimeout(() => {
-      setCartItems((prev) => {
-        const newCart = new Set(prev);
-        newCart.delete(productId);
-        return newCart;
-      });
-    }, 2000);
+  const contactWhatsApp = (product: any, qty = 1) => {
+    const name = product?.name || "product";
+    const price = product?.price ? product.price * qty : undefined;
+    const msg = price
+      ? `Hello, I'm interested in ${name} - Quantity: ${qty} (Total: ₹${price}). Please assist with ordering.`
+      : `Hello, I'm interested in ${name}. Please assist with ordering.`;
+    const url = `https://wa.me/918888095594?text=${encodeURIComponent(msg)}`;
+    window.open(url, "_blank");
   };
 
   return (
@@ -361,22 +499,11 @@ const Toys = () => {
                 </div>
 
                 <Button 
-                  onClick={() => addToCart(product.id)}
-                  disabled={cartItems.has(product.id)}
-                  className={`w-full rounded-full font-semibold transition-all duration-300 ${
-                    cartItems.has(product.id)
-                      ? "bg-purple-500 hover:bg-purple-600"
-                      : "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 hover:shadow-lg hover:shadow-purple-500/30"
-                  }`}
+                  onClick={() => contactWhatsApp(product, 1)} 
+                  className="w-full rounded-full font-semibold bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600"
                 >
-                  {cartItems.has(product.id) ? (
-                    <>Added to Cart ✓</>
-                  ) : (
-                    <>
-                      <ShoppingCart className="mr-2 h-4 w-4" />
-                      Add to Cart
-                    </>
-                  )}
+                  <Phone className="mr-2 h-4 w-4" />
+                  Contact WhatsApp
                 </Button>
               </CardFooter>
             </Card>
@@ -412,4 +539,4 @@ const Toys = () => {
   );
 };
 
-export default Toys;
+export default ToysShowcase;
