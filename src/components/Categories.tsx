@@ -9,7 +9,7 @@ import nutsImg from "@/assets/Cashew.png";
 import perfumeImg from "@/assets/Perfume.png";
 import datesImg from "@/assets/Dates.png";
 import toysImg from "@/assets/Pista.png";
-import chipsImg from "@/assets/Chips.png";
+import chipsImg from "@/assets/chips.png";
 
 const categories = [
   { id: 1, name: "Chocolates", image: "src/assets/images/cho.jpg", description: "Premium chocolates from around the world", path: "/chocolate" },
