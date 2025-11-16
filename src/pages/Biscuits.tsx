@@ -22,6 +22,26 @@ import Footer from "@/components/Footer";
 // Import all product images
 import nutellaImg from "@/assets/images/raphotos/nutella.jpg";
 import lemonImg from "@/assets/images/raphotos/lemon_creams.jpg";
+import creamCrackerImg from "@/assets/images/raphotos/cream_cracker.jpg";
+import muncheeGingerImg from "@/assets/images/biscuits/muncheeginger.jpg";
+import digestiveOriginalImg from "@/assets/images/raphotos/digestive_original.jpg";
+import digestive2Img from "@/assets/images/raphotos/digestive2.jpg";
+import sugarfreeImg from "@/assets/images/raphotos/sugarfree_tiiffany.jpg";
+import orangeImg from "@/assets/images/biscuits/orange.jpg";
+import lotusImg from "@/assets/images/raphotos/lotus_biscoff.jpg";
+import joyImg from "@/assets/images/biscuits/joy.jpg";
+import pandHelloRedImg from "@/assets/images/raphotos/pand_hello_red.jpg";
+import pandaHellowStrawberryImg from "@/assets/images/raphotos/panda_hellow_strawberry.jpg";
+import mcoaatyImg from "@/assets/images/biscuits/mcoaaty.jpg";
+import gprImg from "@/assets/images/biscuits/gpr.jpg";
+import harrodsonImg from "@/assets/images/biscuits/harrodson.jpg";
+import sapphireImg from "@/assets/images/biscuits/sapphire.jpg";
+import sapphirebutterImg from "@/assets/images/biscuits/sapphirebutter.jpg";
+import sapphiresilverImg from "@/assets/images/biscuits/sapphiresilver.jpg";
+import danisabutterImg from "@/assets/images/biscuits/danisabutter.jpg";
+import danisa375Img from "@/assets/images/biscuits/danisa375.jpg";
+import danisa750Img from "@/assets/images/biscuits/danisa750.jpg";
+import americanaImg from "@/assets/images/biscuits/americana.jpg";
 
 const biscuitsProducts = [
   { 
@@ -33,7 +53,7 @@ const biscuitsProducts = [
     description: "Hazelnut cream filled biscuits",
     badge: "Best Seller",
     weight: "276g",
-    image: "src/assets/images/raphotos/nutella_biscuits.jpg"
+    image: nutellaImg
   },
   { 
     id: 2, 
@@ -53,7 +73,7 @@ const biscuitsProducts = [
     reviews: 156,
     description: "Crispy cream crackers",
     weight: "200g",
-    image: "src/assets/images/raphotos/cream_cracker.jpg"
+    image: creamCrackerImg
   },
   { 
     id: 4, 
@@ -63,7 +83,7 @@ const biscuitsProducts = [
     reviews: 203,
     description: "Classic milk biscuits",
     weight: "75g",
-    image: "src/assets/images/raphotos/cream_cracker.jpg"
+    image: creamCrackerImg
   },
   { 
     id: 5, 
@@ -73,7 +93,7 @@ const biscuitsProducts = [
     reviews: 287,
     description: "Spicy ginger flavor",
     weight: "75g",
-    image: "src/assets/images/biscuits/muncheeginger.jpg"
+    image: muncheeGingerImg
   },
   { 
     id: 6, 
@@ -83,7 +103,7 @@ const biscuitsProducts = [
     reviews: 134,
     description: "Wholesome digestive biscuits",
     weight: "30g",
-    image: "src/assets/images/raphotos/digestive_original.jpg"
+    image: digestiveOriginalImg
   },
   { 
     id: 7, 
@@ -93,7 +113,7 @@ const biscuitsProducts = [
     reviews: 98,
     description: "Caramel coated digestive",
     weight: "30g",
-    image: "src/assets/images/raphotos/digestive2.jpg"
+    image: digestive2Img
   },
   { 
     id: 8, 
@@ -104,7 +124,7 @@ const biscuitsProducts = [
     description: "Large pack digestive biscuits",
     badge: "Premium",
     weight: "400g",
-    image: "src/assets/images/raphotos/digestive_original.jpg"
+    image: digestiveOriginalImg
   },
   { 
     id: 9, 
@@ -115,7 +135,7 @@ const biscuitsProducts = [
     description: "Zero sugar chocolate cookies",
     badge: "Popular",
     weight: "190g",
-    image: "src/assets/images/raphotos/sugarfree_tiiffany.jpg"
+    image: sugarfreeImg
   },
   { 
     id: 10, 
@@ -135,7 +155,7 @@ const biscuitsProducts = [
     reviews: 118,
     description: "Zero sugar orange flavor",
     weight: "190g",
-    image: "src/assets/images/biscuits/orange.jpg"
+    image: orangeImg
   },
   { 
     id: 12, 
@@ -146,7 +166,7 @@ const biscuitsProducts = [
     description: "Caramelized Belgian biscuits",
     badge: "Premium",
     weight: "250g",
-    image: "src/assets/images/raphotos/lotus_biscoff.jpg"
+    image: lotusImg
   },
   { 
     id: 13, 
@@ -156,7 +176,7 @@ const biscuitsProducts = [
     reviews: 87,
     description: "Coffee flavored biscuits",
     weight: "37g",
-    image: "src/assets/images/biscuits/joy.jpg"
+    image: joyImg
   },
   { 
     id: 14, 
@@ -166,7 +186,7 @@ const biscuitsProducts = [
     reviews: 234,
     description: "Chocolate cream filled biscuits",
     weight: "22g",
-    image: "src/assets/images/raphotos/pand_hello_red.jpg"
+    image: pandHelloRedImg
   },
   { 
     id: 15, 
@@ -176,7 +196,7 @@ const biscuitsProducts = [
     reviews: 198,
     description: "Strawberry cream filled",
     weight: "42g",
-    image: "src/assets/images/raphotos/panda_hellow_strawberry.jpg"
+    image: pandaHellowStrawberryImg
   },
   { 
     id: 16, 
@@ -187,7 +207,7 @@ const biscuitsProducts = [
     description: "Oat cookies with chocolate chips",
     badge: "New",
     weight: "96g",
-    image: "src/assets/images/biscuits/mcoaaty.jpg"
+    image: mcoaatyImg
   },
   { 
     id: 17, 
@@ -197,7 +217,7 @@ const biscuitsProducts = [
     reviews: 142,
     description: "Oat cookies with raisins",
     weight: "96g",
-    image: "src/assets/images/biscuits/mcoaaty.jpg"
+    image: mcoaatyImg
   },
   { 
     id: 18, 
@@ -207,7 +227,7 @@ const biscuitsProducts = [
     reviews: 167,
     description: "Authentic British recipe cookies",
     weight: "96g",
-    image: "src/assets/images/biscuits/gpr.jpg"
+    image: gprImg
   },
   { 
     id: 19, 
@@ -218,7 +238,7 @@ const biscuitsProducts = [
     description: "Traditional blueberry butter cookies",
     badge: "Premium",
     weight: "338g",
-    image: "src/assets/images/biscuits/harrodson.jpg"
+    image: harrodsonImg
   },
   { 
     id: 20, 
@@ -228,7 +248,7 @@ const biscuitsProducts = [
     reviews: 201,
     description: "Premium chocolate chip cookies",
     weight: "350g",
-    image: "src/assets/images/biscuits/sapphire.jpg"
+    image: sapphireImg
   },
   { 
     id: 21, 
@@ -239,7 +259,7 @@ const biscuitsProducts = [
     description: "Gold collection butter cookies",
     badge: "Premium",
     weight: "350g",
-    image: "src/assets/images/biscuits/sapphirebutter.jpg"
+    image: sapphirebutterImg
   },
   { 
     id: 22, 
@@ -249,7 +269,7 @@ const biscuitsProducts = [
     reviews: 198,
     description: "Silver collection butter cookies",
     weight: "350g",
-    image: "src/assets/images/biscuits/sapphiresilver.jpg"
+    image: sapphiresilverImg
   },
   { 
     id: 23, 
@@ -260,7 +280,7 @@ const biscuitsProducts = [
     description: "Traditional Danish butter cookies",
     badge: "Best Seller",
     weight: "200g",
-    image: "src/assets/images/biscuits/danisabutter.jpg"
+    image: danisabutterImg
   },
   { 
     id: 24, 
@@ -270,7 +290,7 @@ const biscuitsProducts = [
     reviews: 276,
     description: "Traditional Danish butter cookies",
     weight: "375g",
-    image: "src/assets/images/biscuits/danisa375.jpg"
+    image: danisa375Img
   },
   { 
     id: 25, 
@@ -281,7 +301,7 @@ const biscuitsProducts = [
     description: "Traditional Danish butter cookies",
     badge: "Premium",
     weight: "750g",
-    image: "src/assets/images/biscuits/danisa750.jpg"
+    image: danisa750Img
   },
   { 
     id: 26, 
@@ -291,7 +311,7 @@ const biscuitsProducts = [
     reviews: 167,
     description: "Quality premium butter cookies",
     weight: "454g",
-    image: "src/assets/images/biscuits/americana.jpg"
+    image: americanaImg
   },
   { 
     id: 27, 
